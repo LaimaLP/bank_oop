@@ -1,0 +1,16 @@
+{
+    "name": "laima/bank_oop",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Laima\\BankOop\\": ""
+        }
+    },
+    "authors": [
+        {
+            "name": "LaimaLP",
+            "email": "pileliene.laima@gmail.com"
+        }
+    ],
+    "require": {}
+}
