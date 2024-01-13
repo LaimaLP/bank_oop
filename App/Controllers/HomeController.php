@@ -11,7 +11,7 @@ class HomeController
     {
         $greet = ['labas','hello', 'bonjure'];
         //i templeita perduodame data
-        return App::view([
+        return App::view('test',[
             'text' => $greet[rand(0, count($greet)-1)],
             'title' => "Future Bank"
             
