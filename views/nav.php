@@ -11,12 +11,10 @@
                 </li>
             </ul>
             <div style="display: flex; flex-direction:row; gap:20px">
-                <form class="d-flex" role="search">
-                    <button class="btn btn-outline-success" type="submit">Log In</button>
-                </form>
-                <form class="d-flex" role="search">
-                    <button class="btn btn-outline-success" type="submit">Register</button>
-                </form>
+               
+                    <a href="<?= URL ?>/login/login.php"class="btn btn-outline-success">Log In</a>
+               
+                <a href="<?= URL ?>/login/regisrter.php"class="btn btn-outline-success" type="submit">Register</a>
                 <form class="d-flex" role="search">
                     <button class="btn btn-outline-success" type="submit">Log Out</button>
                 </form>

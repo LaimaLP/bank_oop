@@ -7,4 +7,5 @@
     <script src="<?= URL ?>/main.js?v=<?= time() ?>" defer></script>
     <title><?= $title ?? 'Untitled' ?></title>
 </head>
-<body style= "color:green">
+<body style=" background: linear-gradient(to bottom, #6c757d, #236f4b); min-height:100vh; display: flex;
+      flex-direction: column;">

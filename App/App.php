@@ -3,6 +3,8 @@
 namespace Bank\App;
 use Bank\App\Controllers\HomeController;
 use Bank\App\Controllers\AddAccountController;
+use Bank\App\Controllers\LoginController;
+
 class App{
 
     public static function run()
@@ -30,7 +32,9 @@ class App{
         if ('POST' == $method && count($url) == 2 && $url[0] == 'addAccount' && $url[1] == 'store') {
             return (new AddAccountController)->store($_POST);
         }
-      
+        if ('GET' == $method && count($url) == 2 && $url[0] == 'login' && $url[1] == 'login') {
+            return (new AddAccountController)->store($_GET);
+        }
         return '<h1>404</h1>';
     }
 
