@@ -16,10 +16,42 @@ class AddAccountController
         //po tai kai susikuria objekta, writeris jau turi nusiskaites indeksa ir data(is constructorio).
         $members = $writer->showAll(); //tuomet tame sukurtame obj paleidziam showAll metoda ir perduodamas result i $colors (metodas aprasytas FileBase)
 
+
+        $sort = $request['sort'] ?? null;
+
+        if ($sort == 'size-asc') {
+            usort($members, fn($a, $b) => $a->lastname <=> $b->lastname);
+            $sortValue = 'size-desc'; 
+        } elseif($sort == 'size-desc') {
+            usort($members, fn($a, $b) => $b->lastname <=> $a->lastname);
+            $sortValue = 'size-asc'; 
+        } else {
+            $sortValue = 'size-asc'; 
+        }
+
+        $sort2 = $request['sort2'] ?? null;
+
+        if ($sort2 == 'size-asc') {
+            usort($members, fn($a, $b) => $a->balance <=> $b->balance);
+            $sortValue2 = 'size-desc'; 
+        } elseif($sort2 == 'size-desc') {
+            usort($members, fn($a, $b) => $b->balance <=> $a->balance);
+            $sortValue2 = 'size-asc'; 
+        } else {
+            $sortValue2 = 'size-asc'; 
+        }
+
+
+
+
+
+
         //tuomet paleidziamas templatas ->colors/index . tam failui perduodami du kintamieji:title ir colors. colors foreachina datai renderinti
         return App::view('addAccount/index', [
             'title' => 'Account List',
             'members' => $members,
+            'sortValue' => $sortValue,
+            'sortValue2' => $sortValue2,
         ]);
     }
 
@@ -33,10 +65,10 @@ class AddAccountController
 
     public function store($request)
     {
-        $AC = "LT" . rand(10 ** 17, 10 ** 18 - 1);
         $name =  $request['name'] ?? null;
         $lastname =  $request['lastname'] ?? null;
         $PC =  $request['PC'] ?? null;
+        $AC =  $request['AC'] ?? null;
 
         $writer = new FileBase('members');
 

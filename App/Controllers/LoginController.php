@@ -3,15 +3,19 @@
 namespace Bank\App\Controllers;
 use Bank\App\App;
 
-class LoginControllers{
-    public function index()
+class LoginController{
+    public function login()
     {
-        $greet = ['labas','hello', 'bonjure'];
         //i templeita perduodame data
-        return App::view('test',[
-            'text' => $greet[rand(0, count($greet)-1)],
-            'title' => "Future Bank"
-            
+        return App::view('login/login',[
+            'title' => 'Log In'
+        ]);
+    }
+    public function register()
+    {
+        //i templeita perduodame data
+        return App::view('login/register',[
+            'title' => 'Register'
         ]);
     }
 }

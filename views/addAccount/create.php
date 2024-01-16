@@ -1,5 +1,7 @@
-<?php require ROOT . 'views/nav.php' ?>
-
+<?php 
+require ROOT . 'views/nav.php';
+$AC ="LT" . rand(10 ** 17, 10 ** 18 - 1);
+?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-7">
@@ -25,9 +27,10 @@
                                 <input type="text" id="PC" name="PC" required>
                             </div>
                             <div style="display: flex; flex-direction:column;">
-                                <label for="PC"> <b>Account Number will be: </b></label>
+                                <label for="AC"> <b>Account Number will be: </b></label>
+                                <input type="text" id="AC" name="AC" value= <?= $AC ?> readonly>
                             </div>
-                                <span> <?= $AC ="LT" . rand(10 ** 17, 10 ** 18 - 1)?> </span>
+
 
                         </div>
                     </div>

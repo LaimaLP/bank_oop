@@ -3,6 +3,7 @@
 namespace Bank\App;
 use Bank\App\Controllers\HomeController;
 use Bank\App\Controllers\AddAccountController;
+use Bank\App\Controllers\LoginController;
 // use Bank\App\Controllers\LoginController;
 
 class App{
@@ -10,6 +11,7 @@ class App{
     public static function run()
     {
         $server = $_SERVER['REQUEST_URI'];
+        $server = preg_replace('/\?.*$/', '', $server);
         $url = explode('/', $server); //splitina stringa per /, arr[0] niekas, arr[1 ir kiti] jau reiksmes po /
         // print_r($url);
         array_shift($url); //kadangi visada pirmasis yra tuscias, ji pasalinam, toliau dirbam su arr.
@@ -52,6 +54,15 @@ class App{
         if ('GET' == $method && count($url) == 3 && $url[0] == 'addAccount' && $url[1] == 'withdraw') {
             return (new AddAccountController)->withdraw($url[2]);
         }
+        if ('GET' == $method && count($url) == 2 && $url[0] == 'login' && $url[1] == 'login') {
+            return (new LoginController)->login();
+        }
+        if ('GET' == $method && count($url) == 2 && $url[0] == 'login' && $url[1] == 'register') {
+            return (new LoginController)->register();
+        }
+        // if ('POST' == $method && count($url) == 2 && $url[0] == 'addAccount' && $url[1] == 'store') {
+        //     return (new LoginController)->store($_POST);
+        // }
         return '<h1>404</h1>';
     }
 

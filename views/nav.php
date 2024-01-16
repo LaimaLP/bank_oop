@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="<?= URL ?>" style="font-family:fantasy; font-size:30px">  Future Bank <i style="color:#ffda6a;" class="fa-solid fa-sack-dollar"></i></a>
-       
+        <a class="navbar-brand" href="<?= URL ?>" style="font-family:fantasy; font-size:30px; margin-right: 40px;"> Future Bank <i style="color:#ffda6a;" class="fa-solid fa-sack-dollar"></i></a>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -12,18 +12,14 @@
                 </li>
             </ul>
             <div style="display: flex; flex-direction:row; gap:20px">
-               
-                    <a href="<?= URL ?>/login/login.php"class="btn btn-outline-success">Log In</a>
-               
-                <a href="<?= URL ?>/login/regisrter.php"class="btn btn-outline-success" type="submit">Register</a>
+
+                <a href="<?= URL ?>/login/login" class="btn btn-outline-success">Log In</a>
+                <a href="<?= URL ?>/login/register" class="btn btn-outline-success">Register</a>
+              
                 <form class="d-flex" role="search">
                     <button class="btn btn-outline-success" type="submit">Log Out</button>
                 </form>
             </div>
-            <!-- <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Log Out</button>
-      </form> -->
         </div>
     </div>
 </nav>
