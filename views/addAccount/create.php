@@ -27,7 +27,8 @@
                             <div style="display: flex; flex-direction:column;">
                                 <label for="PC"> <b>Account Number will be: </b></label>
                             </div>
-                            <span>LT 251290789014272621</span>
+                                <span> <?= $AC ="LT" . rand(10 ** 17, 10 ** 18 - 1)?> </span>
+
                         </div>
                     </div>
                     <div class="card-footer">

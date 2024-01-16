@@ -2,58 +2,86 @@
 
 namespace App\DB;
 
-use App\DB\DataBase;
+//use App\DB\DataBase;
 
 class FileBase implements DataBase
 {
-    private $file, $data;
+    private $indexFile, $file, $data, $index, $save = true;
 
     public function __construct($name)
     {
         $this->file = ROOT . 'data/' . $name . '.json';
-        if (!file_exists($this->file)) {
-            file_put_contents($this->file, json_encode([]));
-        }
-        $this->data = json_decode(file_get_contents($this->file), 1);
+        $this->indexFile = ROOT . 'data/' . $name . '-index.json';
+        //sitas ifas ivyksta jei kazka naujo padarom
+        if (!file_exists($this->file)) { //tikrinam ar failas egsituoja. tik pirma karta tikrinama
+            file_put_contents($this->file, json_encode([])); //jei nera, sukuria tuscius
+            file_put_contents($this->indexFile, json_encode(1)); //pradinis indeksas yra vienas.
+        } // kai failai sugeneruoti, toliau vyksta nuskaitymas
+        $this->data = json_decode(file_get_contents($this->file)); //nuskaitomas masyvas
+        $this->index = json_decode(file_get_contents($this->indexFile));// nuskaitomas indexas
     }
 
     public function __destruct()
     {
-        file_put_contents($this->file, json_encode($this->data));
+        if ($this->save) {
+            //paima is data ir index duomenis ir iraso juos i failus. Kad jis nepasileistu darant show ir show all uzdedam flaga savinimo.
+            file_put_contents($this->file, json_encode($this->data));
+            file_put_contents($this->indexFile, json_encode($this->index));
+        }
     }   
 
-
-    function create(array $userData) : void
+    public function create(object $data) : int //situos data gaunam is creato
     {
-
-        // $data[] = $userData;
-
+        $id = $this->index; //pasiima indexa
+        $this->index++; //paruosia sekanti indexa
+        $data->id = $id; //i data idedam idx
+        $this->data[] = $data; //ir viska ipaiso i duomenis
+        return $id; //grazina naujai sukurto id, jo nenaudojam, bet gaunam, OK.
     }
 
-    function update(int $userId, array $userData) : void
+
+    public function update(int $id, object $data) : bool
     {
-        $data = $this->read();
-        $data[$userId] = $userData;
-        $this->write($data);
+        foreach ($this->data as $key => $value) { //einam per visus duomenis
+            if ($value->id == $id) { //susirandu ta kuri reikai upd
+                $data->id = $id; //(itvirtinimui, kad tas id kurio ieskojom)
+                $this->data[$key] = $data;
+                return true; //grazina pasiseke ar ne upd
+            }
+        }
+        return false;
     }
 
-    function delete(int $userId) : void
+    public function delete(int $id) : bool
     {
-        $data = $this->read();
-        unset($data[$userId]);
-        $this->write($data);
+        foreach ($this->data as $key => $value) {
+            if ($value->id == $id) {
+                unset($this->data[$key]);//po istrynimo atsiranda skyle, po json iraso kaip masyva, su skyle negali buti, todel pries tai dar array_values padarom
+                $this->data = array_values($this->data); //sugrazina i teisingas eiles.
+                return true;
+            }
+        }
+        return false;
     }
 
-    function show(int $userId) : array
+    public function show(int $id) : object 
     {
-        $data = $this->read();
-        return $data[$userId];
+        $this->save = false; //jei tik show, savint nreikia, pazymim kad false
+        foreach ($this->data as $key => $value) {
+            if ($value->id == $id) {
+                return $value;
+            }
+        }
+        return null;
     }
     
-    function showAll() : array
+    public function showAll() : array
     {
-        return $this->read();
+        $this->save = false;
+        return $this->data; //grazina pries tai konstruktoriuje nuskaitytus duomenis, visa masyva
     }
 
+
+    
 
 }

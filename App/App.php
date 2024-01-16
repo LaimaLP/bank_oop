@@ -3,7 +3,7 @@
 namespace Bank\App;
 use Bank\App\Controllers\HomeController;
 use Bank\App\Controllers\AddAccountController;
-use Bank\App\Controllers\LoginController;
+// use Bank\App\Controllers\LoginController;
 
 class App{
 
@@ -25,6 +25,12 @@ class App{
             
             return (new HomeController)->index();
         }
+
+        
+        if ('GET' == $method && count($url) == 1 && $url[0] == 'addAccount') {
+            return (new AddAccountController)->index($_GET);
+        }
+
         if ($method == 'GET' && count($url) == 2 && $url[0] == 'addAccount' && $url[1] == 'create') {
             
             return (new AddAccountController)->create();
@@ -32,8 +38,19 @@ class App{
         if ('POST' == $method && count($url) == 2 && $url[0] == 'addAccount' && $url[1] == 'store') {
             return (new AddAccountController)->store($_POST);
         }
-        if ('GET' == $method && count($url) == 2 && $url[0] == 'login' && $url[1] == 'login') {
-            return (new AddAccountController)->store($_GET);
+
+        if ('POST' == $method && count($url) == 3 && $url[0] == 'addAccount' && $url[1] == 'destroy') {
+            return (new AddAccountController)->destroy($url[2]); 
+            // o ta treciaji pasiimam i destroy
+        }
+        if ('GET' == $method && count($url) == 3 && $url[0] == 'addAccount' && $url[1] == 'edit') {
+            return (new AddAccountController)->edit($url[2]);
+        }
+        if ('POST' == $method && count($url) == 3 && $url[0] == 'addAccount' && $url[1] == 'update') {
+            return (new AddAccountController)->update($url[2], $_POST);
+        }
+        if ('GET' == $method && count($url) == 3 && $url[0] == 'addAccount' && $url[1] == 'withdraw') {
+            return (new AddAccountController)->withdraw($url[2]);
         }
         return '<h1>404</h1>';
     }
@@ -52,5 +69,10 @@ class App{
         require ROOT . 'views/bottom.php';
         $content = ob_get_clean();
         return $content; //contentas view grazina i kontroleri, kontroleris i routeri, routeris i run, o run isechoina
+    }
+    public static function redirect($url)
+    {
+        header('Location: '.URL.'/'.$url);
+        return null;
     }
 }
