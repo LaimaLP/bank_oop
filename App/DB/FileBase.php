@@ -40,13 +40,15 @@ class FileBase implements DataBase
     }
 
 
-    public function update(int $id, object $data) : bool
+    public function update(int $id, object $userData) : bool
     {
-        foreach ($this->data as $key => $value) { //einam per visus duomenis
-            if ($value->id == $id) { //susirandu ta kuri reikai upd
-                $data->id = $id; //(itvirtinimui, kad tas id kurio ieskojom)
-                $this->data[$key] = $data;
-                return true; //grazina pasiseke ar ne upd
+        $this->save = true;
+        
+        foreach ($this->data as $key => $value) {
+            if ($value->id === $id) {
+
+                $this->data[$key] = $userData;
+                return true;
             }
         }
         return false;

@@ -27,6 +27,21 @@ class App{
             
             return (new HomeController)->index();
         }
+        if ('GET' == $method && count($url) == 1 && $url[0] == 'login') {
+            return (new LoginController)->index();
+        }
+        if ('POST' == $method && count($url) == 1 && $url[0] == 'login') {
+            return (new LoginController)->login($_POST);
+        }
+        if ('POST' == $method && count($url) == 1 && $url[0] == 'logout') {
+            return (new LoginController)->logout();
+        }
+
+
+        // if ($url[0] === 'addAccount' && !Auth::get()->getStatus()) {
+        //     return self::redirect('login');
+        // }
+
 
         
         if ('GET' == $method && count($url) == 1 && $url[0] == 'addAccount') {
@@ -54,12 +69,10 @@ class App{
         if ('GET' == $method && count($url) == 3 && $url[0] == 'addAccount' && $url[1] == 'withdraw') {
             return (new AddAccountController)->withdraw($url[2]);
         }
-        if ('GET' == $method && count($url) == 2 && $url[0] == 'login' && $url[1] == 'login') {
-            return (new LoginController)->login();
-        }
-        if ('GET' == $method && count($url) == 2 && $url[0] == 'login' && $url[1] == 'register') {
-            return (new LoginController)->register();
-        }
+      
+        // if ('GET' == $method && count($url) == 2 && $url[0] == 'login' && $url[1] == 'register') {
+        //     return (new LoginController)->register();
+        // }
         // if ('POST' == $method && count($url) == 2 && $url[0] == 'addAccount' && $url[1] == 'store') {
         //     return (new LoginController)->store($_POST);
         // }
@@ -74,7 +87,13 @@ class App{
                          //ir kintamiesiems priskiria to indexo reiksme
                         //  print_r($data);
        //f-jos viduje atsiranda kintamasis homenumber
-        ob_start(); //output buffer, niekas neiseina su echo. ATlaisvinamas arba kai pasibaigia scriptas arba visa turini surinkti i kintamaji content ir ta buferi istrinam
+        
+       $msg = Message::get()->show();
+       $auth = Auth::get()->getStatus();
+       
+       
+       
+       ob_start(); //output buffer, niekas neiseina su echo. ATlaisvinamas arba kai pasibaigia scriptas arba visa turini surinkti i kintamaji content ir ta buferi istrinam
         require ROOT . 'views/top.php';
         require ROOT . "views/$view.php";
         require ROOT . 'views/bottom.php';

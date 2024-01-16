@@ -3,6 +3,7 @@
 namespace Bank\App\Controllers;
 
 use Bank\App\App;
+use Bank\App\Message;
 use App\DB\FileBase;
 
 
@@ -79,6 +80,11 @@ class AddAccountController
             'AC' => $AC,
             'balance' => 0,
         ]);
+
+
+        Message::get()->Set('success', 'Account was created');
+
+
         return App::redirect('addAccount');
     }
 
@@ -87,6 +93,8 @@ class AddAccountController
 
         $writer = new FileBase('members');
         $writer->delete($id);
+
+        Message::get()->set('info', 'Account was deleted');
 
         return App::redirect('addAccount');
     }
@@ -104,15 +112,21 @@ class AddAccountController
     }
     public function update($id, $request)
     {
-
-        $balance = $request['balance'] ?? null;
         $addmoney = $request['addMoney'] ?? null;
 
-        $writer = new FileBase('members');
-        $writer->update($id, (object) [
-            
-            'balance' => $balance += $addmoney,
-        ]);
+        $writer = new FileBase('members'); //objektas -  prieiga prie duomenu
+
+        $userData = $writer->show($id);
+
+        $userData->balance += $addmoney;
+
+
+        $writer->update($id, $userData);
+
+
+
+        Message::get()->set('success', 'Money was added to the account');
+
         return App::redirect('addAccount');
 
     }
@@ -124,6 +138,23 @@ class AddAccountController
             'title' => 'Withdraw funds',
             'members' => $members
         ]);
+    }
+    public function updateWithdraw($id, $request)
+    {
+
+        $balance = $request['balance'] ?? null;
+        $addmoney = $request['addMoney'] ?? null;
+
+        $writer = new FileBase('members');
+        $writer->update($id, (object) [
+            
+            'balance' => $balance += $addmoney,
+        ]);
+
+        Message::get()->set('success', 'Money was withdrawn from the account.');
+
+        return App::redirect('addAccount');
+
     }
 
 }

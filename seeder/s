@@ -1,0 +1,20 @@
+<?php
+
+echo "seeder started\n";
+
+$users = [
+   (object) [
+        'name' => 'Admin',
+        'email' => 'admin@gmail.com',
+        'password' => sha1('123'),
+    ],
+    (object) [
+        'name' => 'Adam',
+        'email' => 'adam@gmail.com',
+        'password' => sha1('123'),
+    ]
+];
+file_put_contents(__DIR__.'/../data/users.json', json_encode($users));
+file_put_contents(__DIR__.'/../data/users-index.json', json_encode(count($users)+1));
+
+echo "seeder finished\n";
