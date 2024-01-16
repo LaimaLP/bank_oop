@@ -125,7 +125,7 @@ class AddAccountController
 
 
 
-        Message::get()->set('success', 'Money was added to the account');
+        Message::get()->set('success', "$addmoney" .'€ was added to ' ."$userData->name" . "'s account.");
 
         return App::redirect('addAccount');
 
@@ -142,16 +142,16 @@ class AddAccountController
     public function updateWithdraw($id, $request)
     {
 
-        $balance = $request['balance'] ?? null;
-        $addmoney = $request['addMoney'] ?? null;
+        $withdrawMoney = $request['withdraw'] ?? null;
 
         $writer = new FileBase('members');
-        $writer->update($id, (object) [
-            
-            'balance' => $balance += $addmoney,
-        ]);
+        $userData = $writer->show($id);
+        $userData->balance -= $withdrawMoney;
 
-        Message::get()->set('success', 'Money was withdrawn from the account.');
+
+        $writer->update($id, $userData);
+
+        Message::get()->set('success', "$withdrawMoney" .'€ was withdrawn from ' ."$userData->name" . "'s account.");
 
         return App::redirect('addAccount');
 

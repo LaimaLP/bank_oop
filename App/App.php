@@ -69,6 +69,9 @@ class App{
         if ('GET' == $method && count($url) == 3 && $url[0] == 'addAccount' && $url[1] == 'withdraw') {
             return (new AddAccountController)->withdraw($url[2]);
         }
+        if ('POST' == $method && count($url) == 3 && $url[0] == 'addAccount' && $url[1] == 'updateWithdraw') {
+            return (new AddAccountController)->updateWithdraw($url[2], $_POST);
+        }
       
         // if ('GET' == $method && count($url) == 2 && $url[0] == 'login' && $url[1] == 'register') {
         //     return (new LoginController)->register();

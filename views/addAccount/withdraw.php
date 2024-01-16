@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-5">
             <div class="card mt-4">
-                <form action="<?= URL ?>/addAccount/update/<?= $members->id ?>" method="post">
+                <form action="<?= URL ?>/addAccount/updateWithdraw/<?= $members->id ?>" method="post">
 
                     <div class="card-header">
                         <h3 style="text-align:center">Withdraw funds </h3>
