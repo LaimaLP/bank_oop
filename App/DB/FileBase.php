@@ -32,6 +32,8 @@ class FileBase implements DataBase
 
     public function create(object $data) : int //situos data gaunam is creato
     {
+        $this->save = true;
+        
         $id = $this->index; //pasiima indexa
         $this->index++; //paruosia sekanti indexa
         $data->id = $id; //i data idedam idx
@@ -56,6 +58,7 @@ class FileBase implements DataBase
 
     public function delete(int $id) : bool
     {
+        $this->save = true;
         foreach ($this->data as $key => $value) {
             if ($value->id == $id) {
                 unset($this->data[$key]);//po istrynimo atsiranda skyle, po json iraso kaip masyva, su skyle negali buti, todel pries tai dar array_values padarom
@@ -68,6 +71,7 @@ class FileBase implements DataBase
 
     public function show(int $id) : object 
     {
+       
         $this->save = false; //jei tik show, savint nreikia, pazymim kad false
         foreach ($this->data as $key => $value) {
             if ($value->id == $id) {

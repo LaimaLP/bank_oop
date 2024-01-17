@@ -66,10 +66,21 @@ class App{
 
 
 
+        
+
+
         if ('POST' == $method && count($url) == 3 && $url[0] == 'addAccount' && $url[1] == 'destroy') {
-            return (new AddAccountController)->destroy($url[2]); 
+            return (new AddAccountController)->destroy($url[2], $_POST); 
             // o ta treciaji pasiimam i destroy
         }
+
+
+
+
+
+
+
+
 
         if ('GET' == $method && count($url) == 3 && $url[0] == 'addAccount' && $url[1] == 'edit') {
             return (new AddAccountController)->edit($url[2]);

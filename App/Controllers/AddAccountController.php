@@ -21,25 +21,25 @@ class AddAccountController
         $sort = $request['sort'] ?? null;
 
         if ($sort == 'size-asc') {
-            usort($members, fn($a, $b) => $a->lastname <=> $b->lastname);
-            $sortValue = 'size-desc'; 
-        } elseif($sort == 'size-desc') {
-            usort($members, fn($a, $b) => $b->lastname <=> $a->lastname);
-            $sortValue = 'size-asc'; 
+            usort($members, fn ($a, $b) => $a->lastname <=> $b->lastname);
+            $sortValue = 'size-desc';
+        } elseif ($sort == 'size-desc') {
+            usort($members, fn ($a, $b) => $b->lastname <=> $a->lastname);
+            $sortValue = 'size-asc';
         } else {
-            $sortValue = 'size-asc'; 
+            $sortValue = 'size-asc';
         }
 
         $sort2 = $request['sort2'] ?? null;
 
         if ($sort2 == 'size-asc') {
-            usort($members, fn($a, $b) => $a->balance <=> $b->balance);
-            $sortValue2 = 'size-desc'; 
-        } elseif($sort2 == 'size-desc') {
-            usort($members, fn($a, $b) => $b->balance <=> $a->balance);
-            $sortValue2 = 'size-asc'; 
+            usort($members, fn ($a, $b) => $a->balance <=> $b->balance);
+            $sortValue2 = 'size-desc';
+        } elseif ($sort2 == 'size-desc') {
+            usort($members, fn ($a, $b) => $b->balance <=> $a->balance);
+            $sortValue2 = 'size-asc';
         } else {
-            $sortValue2 = 'size-asc'; 
+            $sortValue2 = 'size-asc';
         }
 
 
@@ -71,7 +71,48 @@ class AddAccountController
         $PC =  $request['PC'] ?? null;
         $AC =  $request['AC'] ?? null;
 
+   
+
+
+
+//name and last name validation
+        if (strlen($request['name']) < 3 || strlen($request['lastname']) < 3) {
+            Message::get()->Set('danger', 'User name and last name must be more than three letters.');
+            return App::redirect('addAccount/create');
+        }
+
+
+
+      //asmens kodo validacija
+           
+            $pirmasDigit = substr($PC, 0, 1);
+            $menuoDigit = substr($PC, 3, 2);
+            $dienaDigit = substr($PC, 5, 2);
+            if (
+                strlen($PC) > 11 ||
+                strlen($PC) < 11 ||
+                $pirmasDigit < 2 || $pirmasDigit > 6 ||
+                $menuoDigit > 12 ||
+                $dienaDigit > 31
+            ) {
+                Message::get()->Set('danger', 'Invalid personal code. ');
+                return App::redirect('addAccount/create');
+            }
+        
+
         $writer = new FileBase('members');
+
+        $members = $writer->showAll();
+
+        foreach ($members as $member) {
+            if ($PC == $member->PC) {
+                Message::get()->Set('danger', 'Member with this personal code already exist');
+                return App::redirect('addAccount/create');
+            }
+        }
+
+
+
 
         $writer->create((object) [
             'name' => $name,
@@ -95,19 +136,24 @@ class AddAccountController
 
         return App::view('addAccount/confirmDelete', [
             'title' => 'Confirm Delete',
-            'id'=>$id
+            'id' => $id
         ]);
     }
 
 
 
-    public function destroy($id)
+    public function destroy($id, $request)
     {
 
         $writer = new FileBase('members');
-        $writer->delete($id);
+        $request = $writer->show($id);
+        if ($request->balance == 0) {
 
-        Message::get()->set('info', 'Account was deleted');
+            $writer->delete($id);
+            Message::get()->set('info', 'Account was deleted');
+        } else {
+            Message::get()->set('danger', "Account can't be deleted. Spend your money.");
+        }
 
         return App::redirect('addAccount');
     }
@@ -128,11 +174,22 @@ class AddAccountController
 
     public function update($id, $request)
     {
+        if (!is_numeric($request['addMoney'])) {
+            Message::get()->set('danger', "Input must be a number in €.");
+            return App::redirect("addAccount/edit/$id");
+        } elseif ($request['addMoney'] <= 0) {
+            Message::get()->set('danger', "Input must be a more than 0.");
+            return App::redirect("addAccount/edit/$id");
+        }
+
+
         $addmoney = $request['addMoney'] ?? null;
 
         $writer = new FileBase('members'); //objektas -  prieiga prie duomenu
 
         $userData = $writer->show($id);
+
+
 
         $userData->balance += $addmoney;
 
@@ -141,12 +198,12 @@ class AddAccountController
 
 
 
-        Message::get()->set('success', "$addmoney" .'€ was added to ' ."$userData->name" . "'s account.");
+        Message::get()->set('success', "$addmoney" . '€ was added to ' . "$userData->name" . "'s account.");
 
         return App::redirect('addAccount');
-
     }
-    public function withdraw($id){
+    public function withdraw($id)
+    {
         $writer = new FileBase('members');
         $members = $writer->show($id);
 
@@ -162,15 +219,22 @@ class AddAccountController
 
         $writer = new FileBase('members');
         $userData = $writer->show($id);
-        $userData->balance -= $withdrawMoney;
 
+        if ($withdrawMoney <=  $userData->balance && $withdrawMoney > 0) {
 
-        $writer->update($id, $userData);
-
-        Message::get()->set('success', "$withdrawMoney" .'€ was withdrawn from ' ."$userData->name" . "'s account.");
-
-        return App::redirect('addAccount');
-
+            $userData->balance -= $withdrawMoney;
+            $writer->update($id, $userData);
+            Message::get()->set('success', "$withdrawMoney" . '€ was withdrawn from ' . "$userData->name" . "'s account.");
+            return App::redirect('addAccount');
+        } elseif (!is_numeric($withdrawMoney)) {
+            Message::get()->set('danger', "Input must be a number in €.");
+            return App::redirect("addAccount/withdraw/$userData->id");
+        } elseif ($withdrawMoney <= 0) {
+            Message::get()->set('danger', "Input must be a more than 0.");
+            return App::redirect("addAccount/withdraw/$userData->id");
+        } elseif ($withdrawMoney >  $userData->balance) {
+            Message::get()->set('danger', "The maximum debit amount is $userData->balance €.");
+            return App::redirect("addAccount/withdraw/$userData->id");
+        }
     }
-
 }

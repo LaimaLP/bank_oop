@@ -1,4 +1,10 @@
-<?php require ROOT . 'views/nav.php' ?>
+<?php require ROOT . 'views/nav.php'
+/*   <button type="button" class="btn btn-outline-danger btn-sm" title="Delete account" disabled>
+                                <a href="<?= URL ?>/addAccount/confirmDelete/<?= $member->id ?>" style="text-decoration: none; color: inherit;">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </button>*/
+?>
 
 <div class="container mt-5">
     <div class="row">
@@ -79,7 +85,17 @@
                                 <!-- mygtukai nuorodos i action atvaizdavimo puslapius, per query (get metodu) perduodama memberio info (id) -->
                                 <a href="<?= URL ?>/addAccount/edit/<?= $member->id ?>" class="btn btn-outline-success btn-sm" title="Add money"><i class="fa-solid fa-circle-plus"></i></a>
                                 <a href="<?= URL ?>/addAccount/withdraw/<?= $member->id ?>" class="btn btn-outline-info btn-sm" title="Withdraw money"><i class="fa-solid fa-circle-minus"></i></a>
-                                <a href="<?= URL ?>/addAccount/confirmDelete/<?= $member->id ?>" class="btn btn-outline-danger btn-sm" title="Delete account"> <i class="fa-solid fa-trash-can"></i></a>
+
+
+                                <button type="button" class="btn btn-outline-danger btn-sm" title="Delete account">
+                                    <a href="<?= URL ?>/addAccount/confirmDelete/<?= $member->id ?>" style="text-decoration: none; color: inherit;">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </button>
+
+
+
+
                             </div>
 
                         </div>
@@ -89,6 +105,8 @@
 
     </ul>
 </div>
+
+
 
 </body>
 
