@@ -67,7 +67,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-2">
-                            <?= $member->name . " " . $member->lastname ?>
+                            <?= $member->lastname . " " .$member->name  ?>
                         </div>
                         <div class="col-2">
                             <?= $member->PC ?>
@@ -85,17 +85,10 @@
                                 <!-- mygtukai nuorodos i action atvaizdavimo puslapius, per query (get metodu) perduodama memberio info (id) -->
                                 <a href="<?= URL ?>/addAccount/edit/<?= $member->id ?>" class="btn btn-outline-success btn-sm" title="Add money"><i class="fa-solid fa-circle-plus"></i></a>
                                 <a href="<?= URL ?>/addAccount/withdraw/<?= $member->id ?>" class="btn btn-outline-info btn-sm" title="Withdraw money"><i class="fa-solid fa-circle-minus"></i></a>
+                                <a href="<?= URL ?>/addAccount/confirmDelete/<?= $member->id ?>" class="btn btn-outline-danger btn-sm" title="Withdraw money"><i class="fa-solid fa-trash-can"></i></a>
 
 
-                                <button type="button" class="btn btn-outline-danger btn-sm" title="Delete account">
-                                    <a href="<?= URL ?>/addAccount/confirmDelete/<?= $member->id ?>" style="text-decoration: none; color: inherit;">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </a>
-                                </button>
-
-
-
-
+                         
                             </div>
 
                         </div>

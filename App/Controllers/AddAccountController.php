@@ -106,7 +106,7 @@ class AddAccountController
 
         foreach ($members as $member) {
             if ($PC == $member->PC) {
-                Message::get()->Set('danger', 'Member with this personal code already exist');
+                Message::get()->Set('danger', 'Member with this personal code already exists');
                 return App::redirect('addAccount/create');
             }
         }
@@ -152,7 +152,7 @@ class AddAccountController
             $writer->delete($id);
             Message::get()->set('info', 'Account was deleted');
         } else {
-            Message::get()->set('danger', "Account can't be deleted. Spend your money.");
+            Message::get()->set('danger', "Account is not empty.");
         }
 
         return App::redirect('addAccount');
@@ -175,10 +175,10 @@ class AddAccountController
     public function update($id, $request)
     {
         if (!is_numeric($request['addMoney'])) {
-            Message::get()->set('danger', "Input must be a number in €.");
+            Message::get()->set('danger', "Input must be a number.");
             return App::redirect("addAccount/edit/$id");
         } elseif ($request['addMoney'] <= 0) {
-            Message::get()->set('danger', "Input must be a more than 0.");
+            Message::get()->set('danger', "Input must be more than 0.");
             return App::redirect("addAccount/edit/$id");
         }
 
@@ -227,10 +227,10 @@ class AddAccountController
             Message::get()->set('success', "$withdrawMoney" . '€ was withdrawn from ' . "$userData->name" . "'s account.");
             return App::redirect('addAccount');
         } elseif (!is_numeric($withdrawMoney)) {
-            Message::get()->set('danger', "Input must be a number in €.");
+            Message::get()->set('danger', "Input must be a number.");
             return App::redirect("addAccount/withdraw/$userData->id");
         } elseif ($withdrawMoney <= 0) {
-            Message::get()->set('danger', "Input must be a more than 0.");
+            Message::get()->set('danger', "Input must be more than 0.");
             return App::redirect("addAccount/withdraw/$userData->id");
         } elseif ($withdrawMoney >  $userData->balance) {
             Message::get()->set('danger', "The maximum debit amount is $userData->balance €.");
