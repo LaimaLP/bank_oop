@@ -79,10 +79,7 @@
                                 <!-- mygtukai nuorodos i action atvaizdavimo puslapius, per query (get metodu) perduodama memberio info (id) -->
                                 <a href="<?= URL ?>/addAccount/edit/<?= $member->id ?>" class="btn btn-outline-success btn-sm" title="Add money"><i class="fa-solid fa-circle-plus"></i></a>
                                 <a href="<?= URL ?>/addAccount/withdraw/<?= $member->id ?>" class="btn btn-outline-info btn-sm" title="Withdraw money"><i class="fa-solid fa-circle-minus"></i></a>
-
-                                <form action="<?= URL ?>/addAccount/destroy/<?= $member->id ?>" method="post">
-                                    <button class="btn btn-outline-danger btn-sm" title="Delete account"> <i class="fa-solid fa-trash-can"></i></button>
-                                </form>
+                                <a href="<?= URL ?>/addAccount/confirmDelete/<?= $member->id ?>" class="btn btn-outline-danger btn-sm" title="Delete account"> <i class="fa-solid fa-trash-can"></i></a>
                             </div>
 
                         </div>

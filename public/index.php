@@ -15,4 +15,4 @@ Message::get();
 Auth::get();
 
 
- echo App::run();
+echo App::run();

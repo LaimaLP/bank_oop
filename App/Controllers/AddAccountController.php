@@ -88,6 +88,19 @@ class AddAccountController
         return App::redirect('addAccount');
     }
 
+
+    public function confirmDelete($id)
+    {
+
+
+        return App::view('addAccount/confirmDelete', [
+            'title' => 'Confirm Delete',
+            'id'=>$id
+        ]);
+    }
+
+
+
     public function destroy($id)
     {
 
@@ -110,6 +123,9 @@ class AddAccountController
             'members' => $members
         ]);
     }
+
+
+
     public function update($id, $request)
     {
         $addmoney = $request['addMoney'] ?? null;

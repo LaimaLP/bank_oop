@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="card-footer" style="text-align: center;">
-                    <a class="btn btn-success btn-sm" href="<?= URL ?>/addAccount"title="Back"> <i class="fa-solid fa-backward"></i></a>
+                    <a class="btn btn-success btn-sm" href="<?= URL ?>/addAccount" title="Back"> <i class="fa-solid fa-backward"></i></a>
 
                         <button class="btn btn-success btn-sm" type="submit">Add</button>
                     </div>
