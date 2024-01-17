@@ -1,0 +1,51 @@
+<?php
+echo "seeder started\n";
+$members = [
+   (object) [
+        "name" => "Antanas",
+        "lastname" => "Jonaitis",
+        "AC" => "LT" .rand(100000000000000000, 999999999999999999),
+        "PC" => "39305311112",
+        "balance" => 16,
+    ],
+    (object) [
+        "name" => "Petras",
+        "lastname" => "Antaninis",
+        "AC" => "LT" .rand(100000000000000000, 999999999999999999),
+        "PC" => "39705322222",
+        "balance" => 516,
+    ],
+    (object) [
+        "name" => "Jonas",
+        "lastname" => "Petrainis",
+        "AC" => "LT" .rand(100000000000000000, 999999999999999999),
+        "PC" => "39005333333",
+        "balance" => 432.5,
+    ],
+    (object) [
+        "name" => "Jonas",
+        "lastname" => "Jonaitis",
+        "AC" => "LT" .rand(100000000000000000, 999999999999999999),
+        "PC" => "38205344444",
+        "balance" => 200000100,
+    ],
+    (object)  [
+        "name" => "Petras",
+        "lastname" => "Petrinis",
+        "AC" => "LT" .rand(100000000000000000, 999999999999999999),
+        "PC" => "38705555555",
+        "balance" => 53218,
+    ],
+    (object)  [
+        "name" => "Ona",
+        "lastname" => "Jonaitiene",
+        "AC" => "LT" .rand(100000000000000000, 999999999999999999),
+        "PC" => "48705555555",
+        "balance" => 1000,
+    ],
+
+];
+file_put_contents(__DIR__.'/../data/members.json', json_encode($members));
+file_put_contents(__DIR__.'/../data/members-index.json', json_encode(count($members)+1));
+
+echo "seeder finished\n";
