@@ -8,6 +8,7 @@ use App\DB\FileBase;
 use Bank\App\Request\AccountUpdateRequest;
 use Bank\App\Request\AccountUpdateWithdrawRequest;
 use Bank\App\Request\NewAccountRequest;
+
 class AddAccountController
 {
 
@@ -20,7 +21,6 @@ class AddAccountController
 
 
         $sort = $request['sort'] ?? null;
-
         if ($sort == 'size-asc') {
             usort($members, fn ($a, $b) => $a->lastname <=> $b->lastname);
             $sortValue = 'size-desc';
@@ -32,7 +32,6 @@ class AddAccountController
         }
 
         $sort2 = $request['sort2'] ?? null;
-
         if ($sort2 == 'size-asc') {
             usort($members, fn ($a, $b) => $a->balance <=> $b->balance);
             $sortValue2 = 'size-desc';
@@ -43,12 +42,6 @@ class AddAccountController
             $sortValue2 = 'size-asc';
         }
 
-
-
-
-
-
-        //tuomet paleidziamas templatas ->colors/index . tam failui perduodami du kintamieji:title ir colors. colors foreachina datai renderinti
         return App::view('addAccount/index', [
             'title' => 'Account List',
             'members' => $members,
@@ -61,7 +54,6 @@ class AddAccountController
     {
         return App::view('addAccount/create', [
             'title' => 'Create new account',
-
         ]);
     }
 
@@ -72,12 +64,9 @@ class AddAccountController
         $PC =  $request['PC'] ?? null;
         $AC =  $request['AC'] ?? null;
 
-
         if (!NewAccountRequest::validate($request)) {
             return App::redirect("addAccount/create");
         }
-
-
 
         $writer = new FileBase('members');
 
@@ -90,9 +79,6 @@ class AddAccountController
             }
         }
 
-
-
-
         $writer->create((object) [
             'name' => $name,
             'lastname' => $lastname,
@@ -101,9 +87,7 @@ class AddAccountController
             'balance' => 0,
         ]);
 
-
         Message::get()->Set('success', 'Account was created');
-
 
         return App::redirect('addAccount');
     }
@@ -111,15 +95,11 @@ class AddAccountController
 
     public function confirmDelete($id)
     {
-
-
         return App::view('addAccount/confirmDelete', [
             'title' => 'Confirm Delete',
             'id' => $id
         ]);
     }
-
-
 
     public function destroy($id, $request)
     {
@@ -147,8 +127,6 @@ class AddAccountController
         ]);
     }
 
-
-
     public function update($id, $request)
     {
         if (!AccountUpdateRequest::validate($request)) {
@@ -156,7 +134,7 @@ class AddAccountController
         }
 
         $addmoney = $request['addMoney'] ?? null;
-        $writer = new FileBase('members'); //objektas -  prieiga prie duomenu
+        $writer = new FileBase('members');
         $userData = $writer->show($id);
         $userData->balance += $addmoney;
         $writer->update($id, $userData);
@@ -191,6 +169,5 @@ class AddAccountController
         if (!AccountUpdateWithdrawRequest::validate($request, $userData)) {
             return App::redirect("addAccount/edit/$id");
         }
-
     }
 }

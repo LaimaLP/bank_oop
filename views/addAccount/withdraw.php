@@ -1,7 +1,5 @@
 <?php require ROOT . 'views/nav.php' ?>
 
-
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-5">
@@ -20,12 +18,10 @@
                                 <p> <b> Balance: </b> <?= number_format($members->balance, 2, '.', '')  ?> €.</p>
                                 <input type="text" name="withdraw" required>
                             </div>
-
                         </div>
                     </div>
                     <div class="card-footer" style="text-align: center;">
                     <a class="btn btn-success btn-sm" href="<?= URL ?>/addAccount"title="Back"> <i class="fa-solid fa-backward"></i></a>
-
                         <button class="btn btn-success btn-sm" type="submit">Withdraw</button>
                     </div>
                 </form>

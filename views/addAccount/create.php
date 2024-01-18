@@ -30,8 +30,6 @@ $AC ="LT" . rand(10 ** 17, 10 ** 18 - 1);
                                 <label for="AC"> <b>Account Number will be: </b></label>
                                 <input type="text" id="AC" name="AC" value= <?= $AC ?> readonly>
                             </div>
-
-
                         </div>
                     </div>
                     <div class="card-footer">

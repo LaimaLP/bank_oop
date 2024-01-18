@@ -1,10 +1,7 @@
 <?php
 
 namespace Bank\App\Request;
-
 use Bank\App\Message;
-
-
 
 class NewAccountRequest
 {
@@ -12,12 +9,9 @@ class NewAccountRequest
     {
         $PC =  $request['PC'] ?? null;
 
-
-
         if (strlen($request['name']) < 4 || strlen($request['lastname']) < 4) {
             Message::get()->Set('danger', 'User name and last name must be more than three letters.');
         }
-
 
         $pirmasDigit = substr($PC, 0, 1);
         $menuoDigit = substr($PC, 3, 2);
@@ -31,8 +25,6 @@ class NewAccountRequest
         ) {
             Message::get()->Set('danger', 'Invalid personal code. ');
         }
-
-
 
         if (Message::get()->hasErrors()) {
             return false;

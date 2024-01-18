@@ -4,7 +4,6 @@ namespace Bank\App;
 use Bank\App\Controllers\HomeController;
 use Bank\App\Controllers\AddAccountController;
 use Bank\App\Controllers\LoginController;
-// use Bank\App\Controllers\LoginController;
 
 class App{
 
@@ -37,13 +36,10 @@ class App{
             return (new LoginController)->logout();
         }
 
+        if ($url[0] === 'addAccount' && !Auth::get()->getStatus()) {
+            return self::redirect('login');
+        }
 
-        // if ($url[0] === 'addAccount' && !Auth::get()->getStatus()) {
-        //     return self::redirect('login');
-        // }
-
-
-        
         if ('GET' == $method && count($url) == 1 && $url[0] == 'addAccount') {
             return (new AddAccountController)->index($_GET);
         }
@@ -56,31 +52,13 @@ class App{
             return (new AddAccountController)->store($_POST);
         }
 
-
-
         if ('GET' == $method && count($url) == 3 && $url[0] == 'addAccount' && $url[1] == 'confirmDelete') {
             return (new AddAccountController)->confirmDelete($url[2]); 
         }
 
-
-
-
-
-        
-
-
         if ('POST' == $method && count($url) == 3 && $url[0] == 'addAccount' && $url[1] == 'destroy') {
             return (new AddAccountController)->destroy($url[2], $_POST); 
-            // o ta treciaji pasiimam i destroy
         }
-
-
-
-
-
-
-
-
 
         if ('GET' == $method && count($url) == 3 && $url[0] == 'addAccount' && $url[1] == 'edit') {
             return (new AddAccountController)->edit($url[2]);
@@ -94,31 +72,19 @@ class App{
         if ('POST' == $method && count($url) == 3 && $url[0] == 'addAccount' && $url[1] == 'updateWithdraw') {
             return (new AddAccountController)->updateWithdraw($url[2], $_POST);
         }
-      
-        // if ('GET' == $method && count($url) == 2 && $url[0] == 'login' && $url[1] == 'register') {
-        //     return (new LoginController)->register();
-        // }
-        // if ('POST' == $method && count($url) == 2 && $url[0] == 'addAccount' && $url[1] == 'store') {
-        //     return (new LoginController)->store($_POST);
-        // }
+ 
         return '<h1>404</h1>';
     }
 
 
     public static function view($view, $data = [])
     {
-        extract($data); //pvz i templeita perduodame koki kintamaji,pvz nr sugeneravimas yra kontrolerio reikalas/ 
-                        //ten perduodamas,.. extraxteris extractina idx ir is tu idx padaro tokio pacio vardo kintamuosius
-                         //ir kintamiesiems priskiria to indexo reiksme
-                        //  print_r($data);
-       //f-jos viduje atsiranda kintamasis homenumber
+        extract($data);
         
        $msg = Message::get()->show();
        $auth = Auth::get()->getStatus();
-       
-       
-       
-       ob_start(); //output buffer, niekas neiseina su echo. ATlaisvinamas arba kai pasibaigia scriptas arba visa turini surinkti i kintamaji content ir ta buferi istrinam
+    
+       ob_start();
         require ROOT . 'views/top.php';
         require ROOT . "views/$view.php";
         require ROOT . 'views/bottom.php';

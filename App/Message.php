@@ -2,7 +2,6 @@
 
 namespace Bank\App;
 
-//veiks kaip servisas
 class Message
 {
     private static $message;
@@ -11,7 +10,6 @@ class Message
     {
         return self::$message ?? self::$message = new self;
     }
-
     private function __construct()
     {
         if (isset($_SESSION['message'])) {
@@ -26,7 +24,6 @@ class Message
 
     public function set($type = 'succes', $message)
     {
-
         $this->error = true;
 
         $_SESSION['message'] = [
