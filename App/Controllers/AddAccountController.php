@@ -7,6 +7,7 @@ use Bank\App\Message;
 use App\DB\FileBase;
 use Bank\App\Request\AccountUpdateRequest;
 use Bank\App\Request\AccountUpdateWithdrawRequest;
+use Bank\App\Request\NewAccountRequest;
 class AddAccountController
 {
 
@@ -72,32 +73,10 @@ class AddAccountController
         $AC =  $request['AC'] ?? null;
 
 
-
-
-
-        //name and last name validation
-        if (strlen($request['name']) < 3 || strlen($request['lastname']) < 3) {
-            Message::get()->Set('danger', 'User name and last name must be more than three letters.');
-            return App::redirect('addAccount/create');
+        if (!NewAccountRequest::validate($request)) {
+            return App::redirect("addAccount/create");
         }
 
-
-
-        //asmens kodo validacija
-
-        $pirmasDigit = substr($PC, 0, 1);
-        $menuoDigit = substr($PC, 3, 2);
-        $dienaDigit = substr($PC, 5, 2);
-        if (
-            strlen($PC) > 11 ||
-            strlen($PC) < 11 ||
-            $pirmasDigit < 2 || $pirmasDigit > 6 ||
-            $menuoDigit > 12 ||
-            $dienaDigit > 31
-        ) {
-            Message::get()->Set('danger', 'Invalid personal code. ');
-            return App::redirect('addAccount/create');
-        }
 
 
         $writer = new FileBase('members');
