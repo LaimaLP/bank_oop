@@ -5,8 +5,8 @@ namespace Bank\App\Controllers;
 use Bank\App\App;
 use Bank\App\Message;
 use App\DB\FileBase;
-
-
+use Bank\App\Request\AccountUpdateRequest;
+use Bank\App\Request\AccountUpdateWithdrawRequest;
 class AddAccountController
 {
 
@@ -71,11 +71,11 @@ class AddAccountController
         $PC =  $request['PC'] ?? null;
         $AC =  $request['AC'] ?? null;
 
-   
 
 
 
-//name and last name validation
+
+        //name and last name validation
         if (strlen($request['name']) < 3 || strlen($request['lastname']) < 3) {
             Message::get()->Set('danger', 'User name and last name must be more than three letters.');
             return App::redirect('addAccount/create');
@@ -83,22 +83,22 @@ class AddAccountController
 
 
 
-      //asmens kodo validacija
-           
-            $pirmasDigit = substr($PC, 0, 1);
-            $menuoDigit = substr($PC, 3, 2);
-            $dienaDigit = substr($PC, 5, 2);
-            if (
-                strlen($PC) > 11 ||
-                strlen($PC) < 11 ||
-                $pirmasDigit < 2 || $pirmasDigit > 6 ||
-                $menuoDigit > 12 ||
-                $dienaDigit > 31
-            ) {
-                Message::get()->Set('danger', 'Invalid personal code. ');
-                return App::redirect('addAccount/create');
-            }
-        
+        //asmens kodo validacija
+
+        $pirmasDigit = substr($PC, 0, 1);
+        $menuoDigit = substr($PC, 3, 2);
+        $dienaDigit = substr($PC, 5, 2);
+        if (
+            strlen($PC) > 11 ||
+            strlen($PC) < 11 ||
+            $pirmasDigit < 2 || $pirmasDigit > 6 ||
+            $menuoDigit > 12 ||
+            $dienaDigit > 31
+        ) {
+            Message::get()->Set('danger', 'Invalid personal code. ');
+            return App::redirect('addAccount/create');
+        }
+
 
         $writer = new FileBase('members');
 
@@ -148,7 +148,6 @@ class AddAccountController
         $writer = new FileBase('members');
         $request = $writer->show($id);
         if ($request->balance == 0) {
-
             $writer->delete($id);
             Message::get()->set('info', 'Account was deleted');
         } else {
@@ -163,7 +162,6 @@ class AddAccountController
 
         $writer = new FileBase('members');
         $members = $writer->show($id);
-
         return App::view('addAccount/edit', [
             'title' => 'Edit account',
             'members' => $members
@@ -174,30 +172,15 @@ class AddAccountController
 
     public function update($id, $request)
     {
-        if (!is_numeric($request['addMoney'])) {
-            Message::get()->set('danger', "Input must be a number.");
-            return App::redirect("addAccount/edit/$id");
-        } elseif ($request['addMoney'] <= 0) {
-            Message::get()->set('danger', "Input must be more than 0.");
+        if (!AccountUpdateRequest::validate($request)) {
             return App::redirect("addAccount/edit/$id");
         }
 
-
         $addmoney = $request['addMoney'] ?? null;
-
         $writer = new FileBase('members'); //objektas -  prieiga prie duomenu
-
         $userData = $writer->show($id);
-
-
-
         $userData->balance += $addmoney;
-
-
         $writer->update($id, $userData);
-
-
-
         Message::get()->set('success', "$addmoney" . '€ was added to ' . "$userData->name" . "'s account.");
 
         return App::redirect('addAccount');
@@ -221,20 +204,14 @@ class AddAccountController
         $userData = $writer->show($id);
 
         if ($withdrawMoney <=  $userData->balance && $withdrawMoney > 0) {
-
             $userData->balance -= $withdrawMoney;
             $writer->update($id, $userData);
             Message::get()->set('success', "$withdrawMoney" . '€ was withdrawn from ' . "$userData->name" . "'s account.");
             return App::redirect('addAccount');
-        } elseif (!is_numeric($withdrawMoney)) {
-            Message::get()->set('danger', "Input must be a number.");
-            return App::redirect("addAccount/withdraw/$userData->id");
-        } elseif ($withdrawMoney <= 0) {
-            Message::get()->set('danger', "Input must be more than 0.");
-            return App::redirect("addAccount/withdraw/$userData->id");
-        } elseif ($withdrawMoney >  $userData->balance) {
-            Message::get()->set('danger', "The maximum debit amount is $userData->balance €.");
-            return App::redirect("addAccount/withdraw/$userData->id");
         }
+        if (!AccountUpdateWithdrawRequest::validate($request, $userData)) {
+            return App::redirect("addAccount/edit/$id");
+        }
+
     }
 }
