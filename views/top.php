@@ -11,4 +11,4 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body style=" background: linear-gradient(to bottom, #6c757d, #236f4b); min-height:100vh; display: flex;
-      flex-direction: column;">
+      flex-direction: column; background-image: url('<?= URL ?>/img/pigMon.jpg');background-position: center; background-size: cover;">
