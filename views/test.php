@@ -9,6 +9,6 @@
     </div>
 
     <div class="mission">
-        <h4>The mission of the Bank of Future is to bring benefits to society. To accomplish this, we rely on highly-qualified employees, financial and technological resources.</h4>
+        <h4>The mission of the Future Bank is to bring benefits to society. To accomplish this, we rely on highly-qualified employees, financial and technological resources.</h4>
     </div>
 </div>

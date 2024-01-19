@@ -1,5 +1,6 @@
 <div style="text-align:center;">
-<h2 style="margin: 50px;"> Welcome to Login </h2>
+<h1 style="margin-top: 50px;"> Welcome to Future Bank </h1>
+<h3 style="margin: 20px;"> Login </h3>
     <div class="container col-4 p-4" style="border-radius:10px; display: flex; align-items: center; justify-content: center; background-color: rgba(255, 255, 255, 0.6) ">
         <form action="<?= URL ?>/login" method="post">
             <div class="form-group">
