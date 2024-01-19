@@ -1,6 +1,8 @@
-<footer style="text-align: center;  margin-top: auto; color:white; margin-bottom:0">
+<footer style="text-align: center;  margin-top: auto;margin-bottom:0; background-color:rgba(255, 255, 255, 0.345);">
     <hr>
-    <span>Future Bank since 2024 </span>
+
+    <a class="navbar-brand" href="<?= URL ?>"> <b>Future Bank since 2024 </b></a>
+
 </footer>
 </body>
 

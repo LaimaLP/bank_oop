@@ -21,6 +21,7 @@
     height: 200px;
     border-radius: 10px;
     background-color: rgb(211, 90, 114);
+  
     border: 2px solid rgb(255, 255, 255);
     color: white;
     display: flex;
@@ -87,4 +88,23 @@
 .listas{
     opacity: 0.9;
     border-radius: 10px !important;
+}
+hr{
+    margin:0;
+}
+.mission{
+width: 20%; 
+background-color: rgba(255, 255, 255, 0.4); 
+padding: 20px; 
+border-radius: 10px; 
+margin-right: 3em; 
+margin-top:3em; 
+text-align:center;
+user-select: none;
+box-shadow: 0 0 4px #ccc;
+}
+.mission:hover{
+    background-color: rgba(255, 255, 255, 0.6); 
+    cursor: pointer;
+   
 }

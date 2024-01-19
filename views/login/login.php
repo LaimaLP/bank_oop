@@ -1,17 +1,19 @@
-
-<h2 style="text-align: center; margin-bottom: 50px;"> Welcome to Login </h2>
-    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+<div style="text-align:center;">
+<h2 style="margin: 50px;"> Welcome to Login </h2>
+    <div class="container col-4 p-4" style="border-radius:10px; display: flex; align-items: center; justify-content: center; background-color: rgba(255, 255, 255, 0.6) ">
         <form action="<?= URL ?>/login" method="post">
             <div class="form-group">
-                <label>Email address</label>
+                <label><b>Email address</b></label>
                 <input required type="email" name="email" class="form-control" placeholder="Enter email">
             </div>
             <div class="form-group">
-                <label>Password</label>
+                <label><b>Password </b></label>
                 <input required type="password"  name="password" class="form-control"placeholder="Password">
             </div>
-            <button style=" margin-top: 10px" type="submit" class="btn btn-primary">Submit</button>
+            <button style=" margin-top: 10px" type="submit" class="btn btn-primary ml-6">Submit</button>
         </form>
     </div>
-
+</div>
 <?php require ROOT. 'views/message.php' ?>
+
+
