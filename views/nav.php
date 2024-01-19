@@ -1,9 +1,9 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg bg-body-tertiary navas">
+    <div class="container-fluid logu">
+    <a class="navbar-brand" href="<?= URL ?>" style="font-family:fantasy; font-size:30px; margin-left: 50px;"> Future Bank <i style="color:#ffda6a;" class="fa-solid fa-sack-dollar"></i></a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <a class="navbar-brand" href="<?= URL ?>" style="font-family:fantasy; font-size:30px; margin-left: 50px;margin-right: 50px;"> Future Bank <i style="color:#ffda6a;" class="fa-solid fa-sack-dollar"></i></a>
              
                 <?php if ($auth) : ?>
                     <li class="nav-item">
@@ -19,7 +19,7 @@
                     <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-arrow-right-from-bracket" title="Log Out"></i></button>
                 </form>
             <?php else : ?>
-                <a href="<?= URL ?>/login" class="btn btn-outline-success">Log In</a>
+                <a href="<?= URL ?>/login" class="btn btn-outline-success" style = "margin-right: 50px;">Log In</a>
             <?php endif ?>
             </div>
         </div>

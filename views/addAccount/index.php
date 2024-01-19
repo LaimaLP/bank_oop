@@ -8,8 +8,8 @@
         </div>
     </div>
 </div>
-<div class="container mt-8">
-    <ul class="list-group list-group-flush">
+<div class="container mt-8 ">
+    <ul class="list-group list-group-flush listas">
         <li class="list-group-item">
             <div class="container">
                 <div class="row">
