@@ -15,7 +15,7 @@ $members = [
         "lastname" => "Antaninis",
         "AC" => "LT" . rand(100000000000000000, 999999999999999999),
         "PC" => "39705322222",
-        "balance" => 516,
+        "balance" => 0,
     ],
     (object) [
         "id" => "3",
@@ -31,7 +31,7 @@ $members = [
         "lastname" => "Rytas",
         "AC" => "LT" . rand(100000000000000000, 999999999999999999),
         "PC" => "38205344444",
-        "balance" => 200000100,
+        "balance" => 0,
     ],
     (object)  [
         "id" => "5",
@@ -39,7 +39,7 @@ $members = [
         "lastname" => "Jonaitė",
         "AC" => "LT" . rand(100000000000000000, 999999999999999999),
         "PC" => "48705555555",
-        "balance" => 53218,
+        "balance" => 0,
     ],
     (object)  [
         "id" => "6",

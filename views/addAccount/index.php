@@ -1,4 +1,5 @@
-<?php require ROOT . 'views/nav.php'
+<?php require ROOT . 'views/nav.php';
+
 ?>
 
 <div class="container mt-5">
@@ -61,7 +62,14 @@
                             <div style="display: flex;flex-direction:row; gap: 10px">
                                 <a href="<?= URL ?>/addAccount/edit/<?= $member->id ?>" class="btn btn-outline-success btn-sm" title="Add money"><i class="fa-solid fa-circle-plus"></i></a>
                                 <a href="<?= URL ?>/addAccount/withdraw/<?= $member->id ?>" class="btn btn-outline-info btn-sm" title="Withdraw money"><i class="fa-solid fa-circle-minus"></i></a>
-                                <a href="<?= URL ?>/addAccount/confirmDelete/<?= $member->id ?>" class="btn btn-outline-danger btn-sm" title="Withdraw money"><i class="fa-solid fa-trash-can"></i></a>
+                                
+                                
+                                <?php if ($member->balance > 0) : ?>
+                                    <a href="" class="btn btn-outline-secondary btn-sm" title="Account cannot be deleted" ><i class="fa-solid fa-trash-can"></i></a>
+                                <?php else : ?>
+                                    <a href="<?= URL ?>/addAccount/confirmDelete/<?= $member->id ?>" class="btn btn-outline-danger btn-sm" title="Delete account"><i class="fa-solid fa-trash-can"></i></a>
+                                <?php endif ?>
+
                             </div>
                         </div>
             </li>

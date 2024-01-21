@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary navas">
+<nav class="navbar navbar-expand bg-body-tertiary navas">
     <div class="container-fluid logu">
     <a class="navbar-brand" href="<?= URL ?>" style="font-family:fantasy; font-size:30px; margin-left: 50px;"> Future Bank <i style="color:#ffda6a;" class="fa-solid fa-sack-dollar"></i></a>
 
