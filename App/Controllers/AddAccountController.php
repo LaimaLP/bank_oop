@@ -163,7 +163,7 @@ class AddAccountController
         if ($withdrawMoney <=  $userData->balance && $withdrawMoney > 0) {
             $userData->balance -= $withdrawMoney;
             $writer->update($id, $userData);
-            Message::get()->set('success', "$withdrawMoney" . '€ was withdrawn from ' . "$userData->name" . "'s account.");
+            Message::get()->set('success', "$withdrawMoney" . '€ was withdrawn from ' . "$userData->lastname" . " account.");
             return App::redirect('addAccount');
         }
         if (!AccountUpdateWithdrawRequest::validate($request, $userData)) {
