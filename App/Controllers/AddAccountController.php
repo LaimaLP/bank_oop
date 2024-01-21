@@ -6,7 +6,6 @@ use Bank\App\App;
 use Bank\App\Message;
 use App\DB\FileBase;
 use Bank\App\Request\AccountUpdateRequest;
-use Bank\App\Request\AccountUpdateWithdrawRequest;
 use Bank\App\Request\NewAccountRequest;
 
 class AddAccountController
@@ -129,16 +128,34 @@ class AddAccountController
 
     public function update($id, $request)
     {
-        if (!AccountUpdateRequest::validate($request)) {
-            return App::redirect("addAccount/edit/$id");
-        }
 
-        $addmoney = $request['addMoney'] ?? null;
         $writer = new FileBase('members');
         $userData = $writer->show($id);
-        $userData->balance += $addmoney;
+
+        if (!AccountUpdateRequest::validate($request, $userData)) {
+            if ($request['withdraw']) {
+                return App::redirect("addAccount/withdraw/$id");
+            } elseif ($request['addMoney']) {
+                return App::redirect("addAccount/edit/$id");
+            }
+        }
+
+        if ($withdrawMoney = $request['withdraw']) {
+
+            if ($withdrawMoney <=  $userData->balance && $withdrawMoney > 0) {
+                $userData->balance -= $withdrawMoney;
+            }
+        } elseif ($addmoney = $request['addMoney']) {
+            $userData->balance += $addmoney;
+        }
         $writer->update($id, $userData);
-        Message::get()->set('success', "$addmoney" . '€ was added to ' . "$userData->name" . "'s account.");
+
+        if ($withdrawMoney) {
+            Message::get()->set('warning', "$withdrawMoney" . '€ was withdrawn from ' . "$userData->lastname" . " account.");
+        } elseif ($addmoney) {
+            Message::get()->set('success', "$addmoney" . '€ was added to ' . "$userData->name" . "'s account.");
+        }
+
 
         return App::redirect('addAccount');
     }
@@ -151,23 +168,5 @@ class AddAccountController
             'title' => 'Withdraw funds',
             'members' => $members
         ]);
-    }
-    public function updateWithdraw($id, $request)
-    {
-
-        $withdrawMoney = $request['withdraw'] ?? null;
-
-        $writer = new FileBase('members');
-        $userData = $writer->show($id);
-
-        if ($withdrawMoney <=  $userData->balance && $withdrawMoney > 0) {
-            $userData->balance -= $withdrawMoney;
-            $writer->update($id, $userData);
-            Message::get()->set('success', "$withdrawMoney" . '€ was withdrawn from ' . "$userData->lastname" . " account.");
-            return App::redirect('addAccount');
-        }
-        if (!AccountUpdateWithdrawRequest::validate($request, $userData)) {
-            return App::redirect("addAccount/edit/$id");
-        }
     }
 }
