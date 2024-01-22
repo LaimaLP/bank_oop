@@ -22,7 +22,7 @@ class LoginController{
       
         if(Auth::get()->tryLoginUser($email, $password)){
             Message::get()->set('success', 'You are logged in');
-            return App::redirect('addAccount');
+            return App::redirect('');
         }
     
         Message::get()->set('danger', 'Wrong email or password');
