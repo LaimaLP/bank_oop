@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-5">
-            <div class="card mt-4">
+            <div class="card mt-4" style="background-color:#edf2fae5;">
                 <form action="<?= URL ?>/addAccount/update/<?= $members->id ?>" method="post">
                     <div class="card-header">
                         <h3 style="text-align:center">Add funds </h3>

@@ -6,7 +6,7 @@ $AC ="LT" . rand(10 ** 17, 10 ** 18 - 1);
     <div class="row justify-content-center">
         <div class="col-7">
             <form action="<?= URL ?>/addAccount/store" method="post">
-                <div class="card mt-4">
+                <div class="card mt-4" style="background-color:#edf2fae5;">
                     <div class="card-header">
                         <h3 style="text-align:center">Create New Account</h3>
                     </div>
