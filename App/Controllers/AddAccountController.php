@@ -153,7 +153,7 @@ class AddAccountController
         if ($withdrawMoney) {
             Message::get()->set('warning', "$withdrawMoney" . '€ was withdrawn from ' . "$userData->lastname" . " account.");
         } elseif ($addmoney) {
-            Message::get()->set('success', "$addmoney" . '€ was added to ' . "$userData->name" . "'s account.");
+            Message::get()->set('success', "$addmoney" . '€ was added to ' . "$userData->lastname" . " account.");
         }
 
 
