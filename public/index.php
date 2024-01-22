@@ -8,6 +8,8 @@ session_start();
  
 require '../vendor/autoload.php';
 
+define('DB', 'maria'); //imam info is file
+
 define('ROOT', __DIR__ . '/../'); //rodo kur musu visi faila sudeti
 define('URL', 'http://bank.test'); //rodo, koks adresiukas
 

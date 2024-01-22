@@ -7,6 +7,8 @@ use Bank\App\Message;
 use App\DB\FileBase;
 use Bank\App\Request\AccountUpdateRequest;
 use Bank\App\Request\NewAccountRequest;
+use App\DB\MariaBase;
+
 
 class AddAccountController
 {
@@ -14,8 +16,19 @@ class AddAccountController
     public function index($request)
     {
 
-        $writer = new FileBase('members'); //1. sukuriame irasinetojo faila - objekta, pasileidzia konstruktorius is FileBase klases >> sugeneruojami du failai json ir -index.json
+        // $writer = new FileBase('members'); //1. sukuriame irasinetojo faila - objekta, pasileidzia konstruktorius is FileBase klases >> sugeneruojami du failai json ir -index.json
         //po tai kai susikuria objekta, writeris jau turi nusiskaites indeksa ir data(is constructorio).
+      
+      
+        $writer = match(DB) {
+            'file' => new FileBase('members'),
+            'maria' => new MariaBase('accounts'),
+        };
+      
+      
+      
+      
+      
         $members = $writer->showAll(); //tuomet tame sukurtame obj paleidziam showAll metoda ir perduodamas result i $colors (metodas aprasytas FileBase)
 
 
@@ -67,7 +80,12 @@ class AddAccountController
             return App::redirect("addAccount/create");
         }
 
-        $writer = new FileBase('members');
+        // $writer = new FileBase('members');
+
+        $writer = match(DB) {
+            'file' => new FileBase('members'),
+            'maria' => new MariaBase('accounts'),
+        };
 
         $members = $writer->showAll();
 
@@ -103,7 +121,14 @@ class AddAccountController
     public function destroy($id, $request)
     {
 
-        $writer = new FileBase('members');
+        // $writer = new FileBase('members');
+
+        $writer = match(DB) {
+            'file' => new FileBase('members'),
+            'maria' => new MariaBase('accounts'),
+        };
+
+        
         $request = $writer->show($id);
         if ($request->balance == 0) {
             $writer->delete($id);
@@ -118,7 +143,15 @@ class AddAccountController
     public function edit($id)
     {
 
-        $writer = new FileBase('members');
+        // $writer = new FileBase('members');
+
+
+
+        $writer = match(DB) {
+            'file' => new FileBase('members'),
+            'maria' => new MariaBase('accounts'),
+        };
+        
         $members = $writer->show($id);
         return App::view('addAccount/edit', [
             'title' => 'Edit account',
@@ -129,7 +162,15 @@ class AddAccountController
     public function update($id, $request)
     {
 
-        $writer = new FileBase('members');
+        // $writer = new FileBase('members');
+
+
+        $writer = match(DB) {
+            'file' => new FileBase('members'),
+            'maria' => new MariaBase('accounts'),
+        };
+
+
         $userData = $writer->show($id);
 
         if (!AccountUpdateRequest::validate($request, $userData)) {
@@ -161,7 +202,15 @@ class AddAccountController
     }
     public function withdraw($id)
     {
-        $writer = new FileBase('members');
+        // $writer = new FileBase('members');
+
+        $writer = match(DB) {
+            'file' => new FileBase('members'),
+            'maria' => new MariaBase('accounts'),
+        };
+
+
+
         $members = $writer->show($id);
 
         return App::view('addAccount/withdraw', [
