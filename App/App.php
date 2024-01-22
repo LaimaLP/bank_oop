@@ -37,7 +37,7 @@ class App
             return (new LoginController)->logout();
         }
 
-        if ($url[0] === 'addAccount' && !Auth::get()->getStatus()) {
+        if ($url[0] != '' && !Auth::get()->getStatus()) {
             return self::redirect('login');
         }
 
@@ -74,7 +74,7 @@ class App
             return (new AddAccountController)->update($url[2], $_POST);
         }
 
-        return "<h1> 404 Page Not Found </h1>";
+        return "<h1> 404  </h1>";
     }
 
 
