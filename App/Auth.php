@@ -3,6 +3,7 @@
 namespace Bank\App;
 
 use App\DB\FileBase;
+use App\DB\MariaBase;
 
 class Auth
 {
@@ -32,7 +33,14 @@ public function getStatus(){
 
 public function tryLoginUser($email, $password)
 {
-    $writer = new FileBase('users');
+    // $writer = new FileBase('users');
+
+
+    $writer = match(DB) {
+        'file' => new FileBase('users'),
+        'maria' => new MariaBase('admins'),
+    };
+
     $users = $writer->showAll();
     foreach ($users as $user) {
         if ($user->email == $email && $user->password == sha1($password)) {

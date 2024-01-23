@@ -14,7 +14,7 @@
                     </li>
             </ul>
             <div style="display: flex; flex-direction:row; gap:20px">
-                <div class="me-3"> <b> Hello, <?= $auth ?> </b></div>
+                <div class="me-3" style="font-size:25px;"> <b> Hello, <?= $auth ?> </b></div>
                 <form action="<?= URL ?>/logout" class="d-flex mr-4" style="margin-right:50px" method="post">
                     <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-arrow-right-from-bracket" title="Log Out"></i></button>
                 </form>
