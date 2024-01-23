@@ -11,7 +11,7 @@ class DBTypeController
 
     public static function get()
     {
-        return $_SESSION['DbType'] ? $_SESSION['DbType']['DbType'] : self::$DbType;
+        return $_SESSION['DbType']['DbType'] ?? self::$DbType;
     }
     public function setDatabase($request)
     {

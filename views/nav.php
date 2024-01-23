@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand bg-body-tertiary navas">
     <div class="container-fluid logu">
-    <a class="navbar-brand" href="<?= URL ?>" style="font-family:fantasy; font-size:40px; margin:0 100px;"> Future Bank <i style="color:#ffda6a;" class="fa-solid fa-sack-dollar"></i></a>
+    <a class="navbar-brand" href="<?= URL ?>" style="font-family:fantasy; font-size:40px; margin:0 50px;"> Future Bank <i style="color:#ffda6a;" class="fa-solid fa-sack-dollar"></i></a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">

@@ -8,7 +8,7 @@ require ROOT . 'views/databaseSelection.php';
 <div class="container mt-5">
     <div class="row">
         <div class="col">
-            <h2>Accounts</h2>
+            <h2>Account List</h2>
         </div>
     </div>
 </div>
