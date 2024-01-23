@@ -5,6 +5,7 @@ namespace Bank\App;
 use Bank\App\Controllers\HomeController;
 use Bank\App\Controllers\AddAccountController;
 use Bank\App\Controllers\LoginController;
+use Bank\App\Controllers\DBTypeController;
 
 class App
 {
@@ -22,7 +23,6 @@ class App
     private static function router($url)
     {
         $method = $_SERVER['REQUEST_METHOD'];
-
         if ($method == 'GET' && count($url) == 1 && $url[0] == '') {
 
             return (new HomeController)->index();
@@ -35,6 +35,9 @@ class App
         }
         if ('POST' == $method && count($url) == 1 && $url[0] == 'logout') {
             return (new LoginController)->logout();
+        }
+        if ('POST' == $method && count($url) == 1 && $url[0] == 'addAccount') {
+            return (new DBTypeController)->setDatabase($_POST);
         }
 
         if ($url[0] != '' && !Auth::get()->getStatus()) {

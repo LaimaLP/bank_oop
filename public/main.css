@@ -12092,3 +12092,34 @@ hr {
   background-color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
 }
+
+.database-form {
+  max-width: 400px;
+  margin: auto;
+  padding: 15px;
+  border: 1px solid #ddd;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h5, .h5 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.database-options {
+  display: flex;
+  gap: 55px;
+  justify-content: center;
+}
+
+.database-options label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.databaseButton {
+  padding: 5px;
+  border-radius: 10px;
+}

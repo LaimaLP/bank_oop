@@ -18,17 +18,10 @@ class AddAccountController
 
         // $writer = new FileBase('members'); //1. sukuriame irasinetojo faila - objekta, pasileidzia konstruktorius is FileBase klases >> sugeneruojami du failai json ir -index.json
         //po tai kai susikuria objekta, writeris jau turi nusiskaites indeksa ir data(is constructorio).
-      
-      
-        $writer = match(DB) {
-            'file' => new FileBase('members'),
-            'maria' => new MariaBase('accounts'),
+        $writer = match(DBTypeController::get()) {
+            DB_JSON => new FileBase('members'),
+            DB_MARIA => new MariaBase('accounts'),
         };
-      
-      
-      
-      
-      
         $members = $writer->showAll(); //tuomet tame sukurtame obj paleidziam showAll metoda ir perduodamas result i $colors (metodas aprasytas FileBase)
 
 
@@ -82,11 +75,16 @@ class AddAccountController
 
         // $writer = new FileBase('members');
 
-        $writer = match(DB) {
-            'file' => new FileBase('members'),
-            'maria' => new MariaBase('accounts'),
-        };
+        // $writer = match(DB) {
+        //     'file' => new FileBase('members'),
+        //     'maria' => new MariaBase('accounts'),
+        // };
 
+
+        $writer = match(DBTypeController::get()) {
+            DB_JSON => new FileBase('members'),
+            DB_MARIA => new MariaBase('accounts'),
+        };
         $members = $writer->showAll();
 
         foreach ($members as $member) {
@@ -123,9 +121,14 @@ class AddAccountController
 
         // $writer = new FileBase('members');
 
-        $writer = match(DB) {
-            'file' => new FileBase('members'),
-            'maria' => new MariaBase('accounts'),
+        // $writer = match(DB) {
+        //     'file' => new FileBase('members'),
+        //     'maria' => new MariaBase('accounts'),
+        // };
+
+        $writer = match(DBTypeController::get()) {
+            DB_JSON => new FileBase('members'),
+            DB_MARIA => new MariaBase('accounts'),
         };
 
         
@@ -147,11 +150,17 @@ class AddAccountController
 
 
 
-        $writer = match(DB) {
-            'file' => new FileBase('members'),
-            'maria' => new MariaBase('accounts'),
-        };
+        // $writer = match(DB) {
+        //     'file' => new FileBase('members'),
+        //     'maria' => new MariaBase('accounts'),
+        // };
         
+
+        $writer = match(DBTypeController::get()) {
+            DB_JSON => new FileBase('members'),
+            DB_MARIA => new MariaBase('accounts'),
+        };
+
         $members = $writer->show($id);
         return App::view('addAccount/edit', [
             'title' => 'Edit account',
@@ -165,11 +174,15 @@ class AddAccountController
         // $writer = new FileBase('members');
 
 
-        $writer = match(DB) {
-            'file' => new FileBase('members'),
-            'maria' => new MariaBase('accounts'),
-        };
+        // $writer = match(DB) {
+        //     'file' => new FileBase('members'),
+        //     'maria' => new MariaBase('accounts'),
+        // };
 
+        $writer = match(DBTypeController::get()) {
+            DB_JSON => new FileBase('members'),
+            DB_MARIA => new MariaBase('accounts'),
+        };
 
         $userData = $writer->show($id);
 
@@ -204,9 +217,14 @@ class AddAccountController
     {
         // $writer = new FileBase('members');
 
-        $writer = match(DB) {
-            'file' => new FileBase('members'),
-            'maria' => new MariaBase('accounts'),
+        // $writer = match(DB) {
+        //     'file' => new FileBase('members'),
+        //     'maria' => new MariaBase('accounts'),
+        // };
+
+        $writer = match(DBTypeController::get()) {
+            DB_JSON => new FileBase('members'),
+            DB_MARIA => new MariaBase('accounts'),
         };
 
 

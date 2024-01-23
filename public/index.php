@@ -3,12 +3,16 @@
 use Bank\App\App;
 use Bank\App\Message;
 use Bank\App\Auth;
+
 session_start();
 
- 
+
 require '../vendor/autoload.php';
 
-define('DB', 'maria'); //imam info is file/maria/admins
+define('DB_MARIA', 'maria');
+define('DB_JSON', 'json');
+
+
 
 define('ROOT', __DIR__ . '/../'); //rodo kur musu visi faila sudeti
 define('URL', 'http://bank.test'); //rodo, koks adresiukas

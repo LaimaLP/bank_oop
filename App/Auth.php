@@ -4,7 +4,7 @@ namespace Bank\App;
 
 use App\DB\FileBase;
 use App\DB\MariaBase;
-
+use Bank\App\Controllers\DBTypeController;
 class Auth
 {
     private static $auth;
@@ -35,10 +35,9 @@ public function tryLoginUser($email, $password)
 {
     // $writer = new FileBase('users');
 
-
-    $writer = match(DB) {
-        'file' => new FileBase('users'),
-        'maria' => new MariaBase('admins'),
+    $writer = match(DBTypeController::get()) {
+        DB_JSON => new FileBase('users'),
+        DB_MARIA => new MariaBase('admins'),
     };
 
     $users = $writer->showAll();
