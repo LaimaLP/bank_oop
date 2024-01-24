@@ -7,11 +7,11 @@ use Bank\App\App;
 class DBTypeController
 {
 
-    public static $DbType;
+    public static $DbType=DB_MARIA;
 
     public static function get()
     {
-        return $_SESSION['DbType']['DbType'] ?? self::$DbType;
+        return  $_SESSION['DbType']['DbType'] ?? self::$DbType;
     }
     public function setDatabase($request)
     {

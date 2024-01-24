@@ -1,6 +1,6 @@
 <div class="delete">
     <div class="delete-container">
-        <h2>Are you sure?</h2>
+        <h2>Delete account?</h2>
         <div>
             <form action="<?= URL ?>/addAccount/destroy/<?=$id?>" method="post">
                 <button type="submit" class="btn btn-primary">Yes</button>

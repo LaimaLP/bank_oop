@@ -8,6 +8,10 @@ if (isset($_SESSION['DbType'])) {
     $DbType = $_SESSION['DbType']['DbType'];
 }
 ?>
+<!-- o sito gal nereikia? ka jis cia daro? -->
+
+
+
 
 <div class="container mt-5">
     <div class="row">
@@ -17,11 +21,11 @@ if (isset($_SESSION['DbType'])) {
 
                 <div class="database-options">
                         <label for="maria">
-                            <input type="radio" name="databasetype" value="maria" id="maria" <?= $DbType == 'maria' ? 'checked' : '' ?> />
+                            <input type="radio" name="databasetype" value="maria" id="maria" <?= $_SESSION['DbType']['DbType'] == 'maria' ? 'checked' : '' ?> />
                             MariaBase
                         </label> 
                         <label for="json">
-                            <input type="radio" name="databasetype" value="json" id="json" <?= $DbType == 'json' ? 'checked' : '' ?> />
+                            <input type="radio" name="databasetype" value="json" id="json" <?= $_SESSION['DbType']['DbType'] == 'json' ? 'checked' : '' ?> />
                             FileBase
                         </label>
                         <button type="submit" style="border-radius:10px; background-color:skyblue"><i class="fa-solid fa-forward"></i></button>
