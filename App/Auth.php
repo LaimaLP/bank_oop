@@ -40,6 +40,9 @@ public function tryLoginUser($email, $password)
         DB_MARIA => new MariaBase('admins'),
     };
 
+
+   
+
     $users = $writer->showAll();
     foreach ($users as $user) {
         if ($user->email == $email && $user->password == sha1($password)) {

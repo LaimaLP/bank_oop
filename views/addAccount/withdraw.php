@@ -21,8 +21,8 @@
                         </div>
                     </div>
                     <div class="card-footer" style="text-align: center;">
-                    <a class="btn btn-success btn-sm" href="<?= URL ?>/addAccount"title="Back"> <i class="fa-solid fa-backward"></i></a>
-                        <button class="btn btn-success btn-sm" type="submit">Withdraw</button>
+                    <a class="btn btn-primary btn-sm" href="<?= URL ?>/addAccount"title="Back"> <i class="fa-solid fa-backward"></i></a>
+                        <button class="btn btn-primary btn-sm" type="submit">Withdraw</button>
                     </div>
                 </form>
             </div>
