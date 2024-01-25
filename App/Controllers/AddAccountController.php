@@ -18,7 +18,8 @@ class AddAccountController
 
         // $writer = new FileBase('members'); //1. sukuriame irasinetojo faila - objekta, pasileidzia konstruktorius is FileBase klases >> sugeneruojami du failai json ir -index.json
         //po tai kai susikuria objekta, writeris jau turi nusiskaites indeksa ir data(is constructorio).
-        $writer = match(DBTypeController::get()) {
+   
+        $writer = match(DBTypeController::get()->getDbType()) {
             DB_JSON => new FileBase('members'),
             DB_MARIA => new MariaBase('accounts'),
         };
@@ -81,7 +82,8 @@ class AddAccountController
         // };
 
 
-        $writer = match(DBTypeController::get()) {
+        $writer = match(DBTypeController::get()->getDbType()) {
+
             DB_JSON => new FileBase('members'),
             DB_MARIA => new MariaBase('accounts'),
         };
@@ -126,7 +128,8 @@ class AddAccountController
         //     'maria' => new MariaBase('accounts'),
         // };
 
-        $writer = match(DBTypeController::get()) {
+        $writer = match(DBTypeController::get()->getDbType()) {
+
             DB_JSON => new FileBase('members'),
             DB_MARIA => new MariaBase('accounts'),
         };
@@ -156,7 +159,8 @@ class AddAccountController
         // };
         
 
-        $writer = match(DBTypeController::get()) {
+        $writer = match(DBTypeController::get()->getDbType()) {
+
             DB_JSON => new FileBase('members'),
             DB_MARIA => new MariaBase('accounts'),
         };
@@ -179,7 +183,8 @@ class AddAccountController
         //     'maria' => new MariaBase('accounts'),
         // };
 
-        $writer = match(DBTypeController::get()) {
+        $writer = match(DBTypeController::get()->getDbType()) {
+
             DB_JSON => new FileBase('members'),
             DB_MARIA => new MariaBase('accounts'),
         };
@@ -222,7 +227,8 @@ class AddAccountController
         //     'maria' => new MariaBase('accounts'),
         // };
 
-        $writer = match(DBTypeController::get()) {
+        $writer = match(DBTypeController::get()->getDbType()) {
+
             DB_JSON => new FileBase('members'),
             DB_MARIA => new MariaBase('accounts'),
         };

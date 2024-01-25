@@ -37,7 +37,7 @@ class App
             return (new LoginController)->logout();
         }
         if ('POST' == $method && count($url) == 1 && $url[0] == 'addAccount') {
-            return (new DBTypeController)->setDatabase($_POST);
+            return  DBTypeController::get()->setDatabase($_POST);
         }
 
         if ($url[0] != '' && !Auth::get()->getStatus()) {
@@ -87,6 +87,7 @@ class App
 
         $msg = Message::get()->show();
         $auth = Auth::get()->getStatus();
+        $db = DBTypeController::get()->getDbType();
 
         ob_start();
         require ROOT . 'views/top.php';

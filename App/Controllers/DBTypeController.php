@@ -7,25 +7,40 @@ use Bank\App\App;
 class DBTypeController
 {
 
-    public static $DbType=DB_MARIA;
+    // private static $DbType=DB_MARIA;
+    private static $DbObj;
+    private  $DbType;
 
     public static function get()
     {
-        return  $_SESSION['DbType']['DbType'] ?? self::$DbType;
+        return self::$DbObj ?? self::$DbObj = new self;
+        // return  $_SESSION['DbType'] ?? self::$DbType;
     }
+
+    private function __construct()
+    { //konstruoja zinutes
+        if (isset($_SESSION['DbType'])) {
+            $this->DbType = $_SESSION['DbType']; //is message paima message ir ji uzsetina
+            unset($_SESSION['DbType']);
+          
+        }else{
+            $this->DbType = DB_MARIA;
+        }
+
+    }
+
+    public function getDbType()
+    {
+        return $this->DbType ?? DB_MARIA;
+    }
+
+
+
     public function setDatabase($request)
     {
-        if ($request['databasetype'] == "maria") {
-            self::$DbType = DB_MARIA;
-            $_SESSION['DbType'] = [
-                'DbType' => 'maria',
-            ];
-        } else {
-            self::$DbType = DB_JSON;
-            $_SESSION['DbType'] = [
-                'DbType' => 'json',
-            ];
-        }
+        $this->DbType = $request['databasetype'];
+        $_SESSION['DbType'] = $request['databasetype'];
+
         return App::redirect('addAccount');
     }
 }

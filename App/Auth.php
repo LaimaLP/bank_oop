@@ -35,7 +35,8 @@ public function tryLoginUser($email, $password)
 {
     // $writer = new FileBase('users');
 
-    $writer = match(DBTypeController::get()) {
+    $writer = match(DBTypeController::get()->getDbType()) {
+
         DB_JSON => new FileBase('users'),
         DB_MARIA => new MariaBase('admins'),
     };
