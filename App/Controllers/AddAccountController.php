@@ -18,12 +18,20 @@ class AddAccountController
 
         // $writer = new FileBase('members'); //1. sukuriame irasinetojo faila - objekta, pasileidzia konstruktorius is FileBase klases >> sugeneruojami du failai json ir -index.json
         //po tai kai susikuria objekta, writeris jau turi nusiskaites indeksa ir data(is constructorio).
-   
-        $writer = match(DBTypeController::get()->getDbType()) {
+        $db = DBTypeController::get()->getDbType();
+        $writer = match ($db) {
             DB_JSON => new FileBase('members'),
             DB_MARIA => new MariaBase('accounts'),
         };
         $members = $writer->showAll(); //tuomet tame sukurtame obj paleidziam showAll metoda ir perduodamas result i $colors (metodas aprasytas FileBase)
+
+        if ($db == DB_MARIA) {
+            $totalBalance = (int)$writer->getTotalBalance()->{'totalBalance'};
+            $totalClient = $writer->getTotalBalance()->{'count'};
+            $balanceAverage = (int)$writer->getTotalBalance()->{'average'};
+            $minBalance = $writer->getTotalBalance()->{'min'};
+            $maxBalance = $writer->getTotalBalance()->{'max'};
+        }
 
 
         $sort = $request['sort'] ?? null;
@@ -53,6 +61,12 @@ class AddAccountController
             'members' => $members,
             'sortValue' => $sortValue,
             'sortValue2' => $sortValue2,
+            'totalBalance' => $totalBalance ?? 0,
+            'totalClient' => $totalClient ?? 0,
+            'balanceAverage' =>$balanceAverage ?? 0,
+            'minBalance' =>$minBalance ?? 0,
+            'maxBalance' =>$maxBalance ?? 0,
+            'db' => $db,
         ]);
     }
 
@@ -82,7 +96,7 @@ class AddAccountController
         // };
 
 
-        $writer = match(DBTypeController::get()->getDbType()) {
+        $writer = match (DBTypeController::get()->getDbType()) {
 
             DB_JSON => new FileBase('members'),
             DB_MARIA => new MariaBase('accounts'),
@@ -128,13 +142,13 @@ class AddAccountController
         //     'maria' => new MariaBase('accounts'),
         // };
 
-        $writer = match(DBTypeController::get()->getDbType()) {
+        $writer = match (DBTypeController::get()->getDbType()) {
 
             DB_JSON => new FileBase('members'),
             DB_MARIA => new MariaBase('accounts'),
         };
 
-        
+
         $request = $writer->show($id);
         if ($request->balance == 0) {
             $writer->delete($id);
@@ -157,9 +171,9 @@ class AddAccountController
         //     'file' => new FileBase('members'),
         //     'maria' => new MariaBase('accounts'),
         // };
-        
 
-        $writer = match(DBTypeController::get()->getDbType()) {
+
+        $writer = match (DBTypeController::get()->getDbType()) {
 
             DB_JSON => new FileBase('members'),
             DB_MARIA => new MariaBase('accounts'),
@@ -183,7 +197,7 @@ class AddAccountController
         //     'maria' => new MariaBase('accounts'),
         // };
 
-        $writer = match(DBTypeController::get()->getDbType()) {
+        $writer = match (DBTypeController::get()->getDbType()) {
 
             DB_JSON => new FileBase('members'),
             DB_MARIA => new MariaBase('accounts'),
@@ -227,7 +241,7 @@ class AddAccountController
         //     'maria' => new MariaBase('accounts'),
         // };
 
-        $writer = match(DBTypeController::get()->getDbType()) {
+        $writer = match (DBTypeController::get()->getDbType()) {
 
             DB_JSON => new FileBase('members'),
             DB_MARIA => new MariaBase('accounts'),

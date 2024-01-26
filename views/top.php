@@ -15,5 +15,5 @@
     <link rel="manifest" href="<?= URL ?>/favicon/site.webmanifest">
 </head>
 
-<body style=" background: linear-gradient(to bottom, #6c757d, #236f4b); min-height:100vh; display: flex;
-      flex-direction: column; background-image: url('<?= URL ?>/img/pigMon.jpg');background-position: center; background-size: cover;">
+<body style="height:100vh; display: flex;
+      flex-direction: column; background-image: url('<?= URL ?>/img/pigMon.jpg');background-position: center center; background-size: cover;  background-repeat: no-repeat;">

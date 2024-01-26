@@ -12095,7 +12095,6 @@ hr {
 
 .database-form {
   max-width: 400px;
-  margin: auto;
   padding: 15px;
   border: 1px solid #ddd;
   background-color: rgba(255, 255, 255, 0.5);
@@ -12122,4 +12121,40 @@ h5, .h5 {
 .databaseButton {
   padding: 5px;
   border-radius: 10px;
+}
+
+.statistics-container {
+  max-width: 240px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.statistics-container:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+#statisticsDiv p {
+  margin-bottom: 0 !important;
+}
+
+#statisticsDiv {
+  position: absolute; /* or position: absolute; */
+  top: -55px;
+  left: 245px;
+  display: none;
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+#statisticsDiv.show {
+  display: block;
 }

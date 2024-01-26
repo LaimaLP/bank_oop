@@ -1,6 +1,7 @@
 <?php
 
 namespace App\DB;
+
 use App\DB\DataBase;
 use PDO;
 
@@ -19,17 +20,17 @@ class MariaBase implements DataBase
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, //pasireguliuojam ikad grazintu obj, o ne asoc masyva
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, //pasireguliuojam kad grazintu obj, o ne asoc masyva
             PDO::ATTR_EMULATE_PREPARES   => false,
         ];
         $this->pdo = new PDO($dsn, $user, $pass, $options);
         $this->table = $table;
     }
 
-   
 
 
-    public function create(object $data) : int
+
+    public function create(object $data): int
     {
         $sql = "
             INSERT INTO {$this->table} (name, lastname, AC, PC, balance)
@@ -41,7 +42,7 @@ class MariaBase implements DataBase
         return $this->pdo->lastInsertId(); //grazina svieziausia ID
     }
 
-    public function update(int $id, object $data) : bool
+    public function update(int $id, object $data): bool
     {
         $sql = "
             UPDATE {$this->table}
@@ -54,7 +55,7 @@ class MariaBase implements DataBase
         return $stmt->execute([$data->name, $data->lastname, $data->AC, $data->PC, $data->balance, $id]);
     }
 
-    public function delete(int $id) : bool //gaunam ID kuri reikia istrinti, 
+    public function delete(int $id): bool //gaunam ID kuri reikia istrinti, 
     {
         $sql = "
             DELETE FROM {$this->table}
@@ -66,7 +67,7 @@ class MariaBase implements DataBase
         return $stmt->execute([$id]);
     }
 
-    public function show(int $id) : object
+    public function show(int $id): object
     {
         $sql = "
             SELECT *
@@ -80,8 +81,8 @@ class MariaBase implements DataBase
 
         return $stmt->fetch();
     }
-    
-    public function showAll() : array
+
+    public function showAll(): array
     {
         $sql = "
             SELECT *
@@ -92,4 +93,25 @@ class MariaBase implements DataBase
 
         return $stmt->fetchAll();
     }
+
+
+
+
+
+    public function getTotalBalance(): object|null
+    {
+        $sql = "
+        SELECT SUM(balance) as totalBalance, COUNT(*) AS count, AVG(balance) as average, MIN(balance) AS min, MAX(balance) AS max
+        FROM accounts
+    ";
+
+        $stmt = $this->pdo->query($sql);
+
+
+        $stat = $stmt->fetch();
+
+        return $stat;
+    }
+
+
 }

@@ -10,4 +10,5 @@ interface DataBase
     function delete(int $userId): bool;
     function show(int $userId): object;
     function showAll(): array;
+    function getTotalBalance() : object|null;
 }
