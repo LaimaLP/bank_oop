@@ -13,8 +13,9 @@
                             <div style="display: flex; flex-direction:column; gap:2px">
                                 <p> <b>Name: </b> <?= $members->name ?> </p>
                                 <p> <b>Last Name: </b> <?= $members->lastname ?> </p>
-                                <p> <b> Balance: </b> <?= number_format($members->balance, 2, '.', '')  ?> €.</p>
-                                <input type="text" name="addMoney" required>
+                                <p> <b> Balance: </b> <?= number_format($members->balance, 2, '.', '')  ?> €</p>
+                                <p> <b> Account Number: </b> <?= $members->AC ?></p>
+                                <input type="text" name="addMoney" placeholder="Enter amount">
                             </div>
                         </div>
                     </div>

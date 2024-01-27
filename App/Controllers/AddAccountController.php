@@ -224,7 +224,7 @@ class AddAccountController
         $writer->update($id, $userData);
 
         if ($withdrawMoney) {
-            Message::get()->set('warning', "$withdrawMoney" . '€ was withdrawn from ' . "$userData->lastname" . " account.");
+            Message::get()->set('success', "$withdrawMoney" . '€ was withdrawn from ' . "$userData->lastname" . " account.");
         } elseif ($addmoney) {
             Message::get()->set('success', "$addmoney" . '€ was added to ' . "$userData->lastname" . " account.");
         }
