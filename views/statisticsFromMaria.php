@@ -16,15 +16,3 @@
 
 
 
-<!-- <div class="text-container">
-    <h2> <i class="fa fa-coffee coffee" aria-hidden="true" style="font-size: 80px;"></i> Drinks</h2>
-    <p class="text">Lorem ipsum
-        dolor sit amet consectetur adipisicing elit. Suscipit perferendis
-        ipsa, qui non minus minima sapiente laboriosam voluptatum alias <span class="dots">...</span>
-         <span class="more-text">Architecto vero a quis libero quisquam fugit. Non sit pariatur recusandae dolores
-            quam consequatur mollitia itaque magnam eius, beatae ducimus veritatis vel tempore ex id, ea
-            reiciendis et molestiae illo maiores. Ullam maxime, officia quos voluptate quis eos laboriosam enim
-            nisi hic est, et nulla
-            culpa quibusdam soluta alias? </span></p>
-    <button class="read-more-btn">Read More</button>
-</div> -->
