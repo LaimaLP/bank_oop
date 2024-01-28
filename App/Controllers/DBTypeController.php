@@ -21,7 +21,6 @@ class DBTypeController
     { //konstruoja zinutes
         if (isset($_SESSION['DbType'])) {
             $this->DbType = $_SESSION['DbType']; //is message paima message ir ji uzsetina
-            unset($_SESSION['DbType']);
           
         }else{
             $this->DbType = DB_MARIA;
