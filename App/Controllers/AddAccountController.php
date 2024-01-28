@@ -83,6 +83,7 @@ class AddAccountController
             'minBalance' =>$minBalance ?? 0,
             'maxBalance' =>$maxBalance ?? 0,
             'db' => $db,
+            'category'=>$category ?? 0,
         ]);
     }
 

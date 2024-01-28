@@ -32,14 +32,14 @@
                 </div>
                 <div class="statistics-container mt-2">
                     <form action="<?= URL ?>/addAccount/" id="filterForm" method="get">
-                        <label for="category"><b>Category:</b></label>
+                        <label for="category"><b>Category: </b></label>
                         <select id="category" name="category" class="form-select-sm">
                             <option value="all">All</option>
-                            <option value="woman">Woman</option>
-                            <option value="man">Man</option>
-                            <option value="zero">Balance 0</option>
+                            <option value="woman" <?= $category == "woman" ?  'selected' : "" ?>>Woman</option>
+                            <option value="man"<?= $category == "man" ?  'selected' : "" ?>>Man</option>
+                            <option value="zero" <?= $category == "zero" ?  'selected' : "" ?>>Balance 0</option>
                         </select>
-                        <button class="btn btn-info btn-sm" type="submit">Show</button>
+                        <button style="margin-left: 10px" class="btn btn-info btn-sm" type="submit"><i class="fa-solid fa-angles-right"> </i></button>
                     </form>
 
                 </div>
