@@ -112,6 +112,16 @@ class MariaBase implements DataBase
 
         return $stat;
     }
+    //like operatorius
+    public function getByFilter($param, $filter)
+    {
+        $sql = "
+        SELECT * FROM accounts
+        Where $param LIKE ?
+        ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$filter]);
 
-
+        return $stmt->fetchAll();
+    }
 }

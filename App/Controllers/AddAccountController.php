@@ -23,7 +23,21 @@ class AddAccountController
             DB_JSON => new FileBase('members'),
             DB_MARIA => new MariaBase('accounts'),
         };
-        $members = $writer->showAll(); //tuomet tame sukurtame obj paleidziam showAll metoda ir perduodamas result i $colors (metodas aprasytas FileBase)
+
+        $category = $request['category']?? null;
+     
+        if($category == "woman"){
+            $members = $writer->getByFilter('PC',"4%");
+        } elseif($category == "man"){
+            $members = $writer->getByFilter('PC',"3%");
+        } elseif($category == "zero"){
+            $members = $writer->getByFilter('balance',"0%");
+        }else{
+            $members = $writer->showAll();
+        }
+
+
+        // $members = $writer->showAll(); //tuomet tame sukurtame obj paleidziam showAll metoda ir perduodamas result i $colors (metodas aprasytas FileBase)
 
         if ($db == DB_MARIA) {
             $totalBalance = (int)$writer->getTotalBalance()->{'totalBalance'};
@@ -31,6 +45,8 @@ class AddAccountController
             $balanceAverage = (int)$writer->getTotalBalance()->{'average'};
             $minBalance = $writer->getTotalBalance()->{'min'};
             $maxBalance = $writer->getTotalBalance()->{'max'};
+
+           
         }
 
 
@@ -240,7 +256,6 @@ class AddAccountController
         //     'file' => new FileBase('members'),
         //     'maria' => new MariaBase('accounts'),
         // };
-
         $writer = match (DBTypeController::get()->getDbType()) {
 
             DB_JSON => new FileBase('members'),
