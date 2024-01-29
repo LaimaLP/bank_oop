@@ -33,13 +33,10 @@ public function getStatus(){
 
 public function tryLoginUser($email, $password)
 {
-    // $writer = new FileBase('users');
 
-    $writer = match(DBTypeController::get()->getDbType()) {
+    $writer = new FileBase('users');
 
-        DB_JSON => new FileBase('users'),
-        DB_MARIA => new MariaBase('admins'),
-    };
+    
 
 
    
