@@ -12124,7 +12124,7 @@ h5, .h5 {
 }
 
 .statistics-container {
-  max-width: 240px;
+  max-width: 250px;
   padding: 10px;
   border: 1px solid #ddd;
   background-color: rgba(255, 255, 255, 0.8);
@@ -12146,7 +12146,7 @@ h5, .h5 {
 #statisticsDiv {
   position: absolute; /* or position: absolute; */
   top: -55px;
-  left: 245px;
+  left: 260px;
   display: none;
   background-color: rgb(255, 255, 255);
   padding: 20px;

@@ -13,7 +13,7 @@
                         <input type="radio" name="databasetype" value="json" id="json" <?= $db == DB_JSON ? 'checked' : '' ?> />
                         FileBase
                     </label>
-                    <button type="submit" style="border-radius:10px; background-color:skyblue"><i class="fa-solid fa-angles-right"></i></button>
+                    <button type="submit" class="btn btn-info btn-sm"><i class="fa-solid fa-angles-right"></i></button>
                 </div>
             </form>
         </div>
@@ -22,7 +22,7 @@
             <div class="col-7">
                 <div id="test" class="statistics-container"> <b>Statistics from MariaBase </b><i class="fa-solid fa-angles-right"></i></div>
                 <div style="position:relative">
-                    <div class = "statisticsDiv" id="statisticsDiv">
+                    <div class="statisticsDiv" id="statisticsDiv">
                         <p> <b> Total Balance: </b> <?= $totalBalance ?> €. </p>
                         <p> <b> Total Clients: </b> <?= $totalClient ?>. </p>
                         <p> <b> Average balance in clients account: </b><?= $balanceAverage ?> €. </p>
@@ -30,6 +30,24 @@
                         <p style="margin-bottom:0"> <b> Maximum balance: </b><?= $maxBalance ?> €. </p>
                     </div>
                 </div>
+                <div class="statistics-container mt-2">
+                    <form action="<?= URL ?>/addAccount/" id="filterForm" method="get">
+                        <label for="category"><b>Category: </b></label>
+                        <select id="category" name="category" class="form-select-sm">
+                            <option value="all">All</option>
+                            <option value="woman" <?= $category == "woman" ?  'selected' : "" ?>>Woman</option>
+                            <option value="man"<?= $category == "man" ?  'selected' : "" ?>>Man</option>
+                            <option value="zero" <?= $category == "zero" ?  'selected' : "" ?>>Balance 0</option>
+                        </select>
+                        <button style="margin-left: 10px" class="btn btn-info btn-sm" type="submit"><i class="fa-solid fa-angles-right"> </i></button>
+                    </form>
+
+                </div>
+
+
+
+
+
             </div>
         <?php endif ?>
     </div>

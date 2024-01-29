@@ -12,14 +12,15 @@ require '../vendor/autoload.php';
 
 define('DB_MARIA', 'maria');
 define('DB_JSON', 'json');
-
-
+// echo 'Nauja konstruoja';
+// echo "Current time: " . date("H:i:s");
+DBTypeController::get();
+Message::get();
+Auth::get();
 
 define('ROOT', __DIR__ . '/../'); //rodo kur musu visi faila sudeti
 define('URL', 'http://bank.test'); //rodo, koks adresiukas
-// DBTypeController::get();
-Message::get();
-Auth::get();
+
 
 
 
