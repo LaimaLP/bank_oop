@@ -19,13 +19,13 @@ class DBTypeController
         if (isset($_SESSION['DbType'])) {
             $this->DbType = $_SESSION['DbType']; 
         }else{
-            $this->DbType = DB_MARIA;
+            $this->DbType = DB_JSON;
         }
     }
 
     public function getDbType()
     {
-        return $this->DbType ?? DB_MARIA;
+        return $this->DbType ?? DB_JSON;
     }
 
 
