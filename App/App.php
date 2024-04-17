@@ -13,9 +13,11 @@ class App
     public static function run()
     {
         $server = $_SERVER['REQUEST_URI'];
-        $server = preg_replace('/\?.*$/', '', $server);
+   
+        $server = preg_replace('/\?.*$/', '', $server); //remove unwanted symbols
+
+
         $url = explode('/', $server); //splitina stringa per /, arr[0] niekas, arr[1 ir kiti] jau reiksmes po /
-        // print_r($url);
         array_shift($url); //kadangi visada pirmasis yra tuscias, ji pasalinam, toliau dirbam su arr.
         return self::router($url);
     }
@@ -23,8 +25,8 @@ class App
     private static function router($url)
     {
         $method = $_SERVER['REQUEST_METHOD'];
-        if ($method == 'GET' && count($url) == 1 && $url[0] == '') {
 
+        if ($method == 'GET' && count($url) == 1 && $url[0] == '') {
             return (new HomeController)->index();
         }
         if ('GET' == $method && count($url) == 1 && $url[0] == 'login') {

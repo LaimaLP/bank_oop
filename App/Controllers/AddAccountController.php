@@ -12,12 +12,12 @@ use App\DB\MariaBase;
 
 class AddAccountController
 {
-
     public function index($request)
     {
 
         // $writer = new FileBase('members'); //1. sukuriame irasinetojo faila - objekta, pasileidzia konstruktorius is FileBase klases >> sugeneruojami du failai json ir -index.json
         //po tai kai susikuria objekta, writeris jau turi nusiskaites indeksa ir data(is constructorio).
+
         $db = DBTypeController::get()->getDbType();
         $writer = match ($db) {
             DB_JSON => new FileBase('members'),
@@ -45,8 +45,6 @@ class AddAccountController
             $balanceAverage = (int)$writer->getTotalBalance()->{'average'};
             $minBalance = $writer->getTotalBalance()->{'min'};
             $maxBalance = $writer->getTotalBalance()->{'max'};
-
-           
         }
 
 
@@ -114,10 +112,10 @@ class AddAccountController
 
 
         $writer = match (DBTypeController::get()->getDbType()) {
-
             DB_JSON => new FileBase('members'),
             DB_MARIA => new MariaBase('accounts'),
         };
+        
         $members = $writer->showAll();
 
         foreach ($members as $member) {
@@ -222,7 +220,7 @@ class AddAccountController
 
         $userData = $writer->show($id);
 
-        if (!AccountUpdateRequest::validate($request, $userData)) {
+        if (!AccountUpdateRequest::validate($request, $userData)) { //more precise function name - isValid
             if ($request['withdraw']) {
                 return App::redirect("addAccount/withdraw/$id");
             } elseif ($request['addMoney']) {
@@ -253,10 +251,6 @@ class AddAccountController
     {
         // $writer = new FileBase('members');
 
-        // $writer = match(DB) {
-        //     'file' => new FileBase('members'),
-        //     'maria' => new MariaBase('accounts'),
-        // };
         $writer = match (DBTypeController::get()->getDbType()) {
 
             DB_JSON => new FileBase('members'),

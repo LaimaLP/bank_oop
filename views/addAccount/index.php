@@ -64,7 +64,6 @@ require ROOT . 'views/databaseSelection.php';
                                 <a href="<?= URL ?>/addAccount/edit/<?= $member->id ?>" class="btn btn-outline-success btn-sm" title="Add money"><i class="fa-solid fa-circle-plus"></i></a>
                                 <a href="<?= URL ?>/addAccount/withdraw/<?= $member->id ?>" class="btn btn-outline-info btn-sm" title="Withdraw money"><i class="fa-solid fa-circle-minus"></i></a>
 
-
                                 <?php if ($member->balance > 0) : ?>
                                     <a href="" class="btn btn-outline-secondary btn-sm" title="Account cannot be deleted"><i class="fa-solid fa-trash-can"></i></a>
                                 <?php else : ?>

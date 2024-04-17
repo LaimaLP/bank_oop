@@ -1,5 +1,4 @@
 <?php
-//gana esminis dalykas
 namespace Bank\App\Controllers;
 use Bank\App\App;
 use Bank\App\Auth;
@@ -9,7 +8,6 @@ use Bank\App\Message;
 class LoginController{
     public function index()
     {
-        //i templeita perduodame data
         return App::view('login/login',[
             'title' => 'Login'
         ]);
