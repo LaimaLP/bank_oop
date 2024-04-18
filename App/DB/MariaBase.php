@@ -38,8 +38,9 @@ class MariaBase implements DataBase
         ";
 
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$data->name, $data->lastname, $data->AC, $data->PC, $data->balance]);
-        return $this->pdo->lastInsertId(); //grazina svieziausia ID
+        $stmt->execute([$data->name, $data->lastname, $data->AC, $data->PC, $data->balance]); 
+        //This line prepares the SQL statement for execution. It uses prepare method to create a prepared statement, which helps prevent SQL injection attacks.
+        return $this->pdo->lastInsertId(); 
     }
 
     public function update(int $id, object $data): bool
@@ -55,7 +56,7 @@ class MariaBase implements DataBase
         return $stmt->execute([$data->name, $data->lastname, $data->AC, $data->PC, $data->balance, $id]);
     }
 
-    public function delete(int $id): bool //gaunam ID kuri reikia istrinti, 
+    public function delete(int $id): bool 
     {
         $sql = "
             DELETE FROM {$this->table}
@@ -93,9 +94,6 @@ class MariaBase implements DataBase
 
         return $stmt->fetchAll();
     }
-
-
-
 
 
     public function getTotalBalance(): object|null

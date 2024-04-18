@@ -17,8 +17,8 @@ class App
         $server = preg_replace('/\?.*$/', '', $server); //remove unwanted symbols
 
 
-        $url = explode('/', $server); //splitina stringa per /, arr[0] niekas, arr[1 ir kiti] jau reiksmes po /
-        array_shift($url); //kadangi visada pirmasis yra tuscias, ji pasalinam, toliau dirbam su arr.
+        $url = explode('/', $server);
+        array_shift($url); 
         return self::router($url);
     }
 

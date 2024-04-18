@@ -8,7 +8,6 @@ class HomeController
 {
     public function index()
     {
-        //i templeita perduodame data
         return App::view('home',[
             'title' => "Future Bank"
             

@@ -38,8 +38,8 @@ class FileBase implements DataBase
         $id = $this->index; //pasiima indexa
         $this->index++; //paruosia sekanti indexa
         $data->id = $id; //i data idedam idx
-        $this->data[] = $data; //ir viska ipaiso i duomenis
-        return $id; //grazina naujai sukurto id, jo nenaudojam, bet gaunam, OK.
+        $this->data[] = $data; 
+        return $id; 
     }
 
     public function update(int $id, object $userData): bool
@@ -72,7 +72,7 @@ class FileBase implements DataBase
     public function show(int $id): object
     {
 
-        $this->save = false; //jei tik show, savint nreikia, pazymim kad false
+        $this->save = false; 
         foreach ($this->data as $key => $value) {
             if ($value->id == $id) {
                 return $value;

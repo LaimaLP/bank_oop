@@ -105,12 +105,6 @@ class AddAccountController
 
         // $writer = new FileBase('members');
 
-        // $writer = match(DB) {
-        //     'file' => new FileBase('members'),
-        //     'maria' => new MariaBase('accounts'),
-        // };
-
-
         $writer = match (DBTypeController::get()->getDbType()) {
             DB_JSON => new FileBase('members'),
             DB_MARIA => new MariaBase('accounts'),
@@ -152,11 +146,6 @@ class AddAccountController
 
         // $writer = new FileBase('members');
 
-        // $writer = match(DB) {
-        //     'file' => new FileBase('members'),
-        //     'maria' => new MariaBase('accounts'),
-        // };
-
         $writer = match (DBTypeController::get()->getDbType()) {
 
             DB_JSON => new FileBase('members'),
@@ -181,13 +170,6 @@ class AddAccountController
         // $writer = new FileBase('members');
 
 
-
-        // $writer = match(DB) {
-        //     'file' => new FileBase('members'),
-        //     'maria' => new MariaBase('accounts'),
-        // };
-
-
         $writer = match (DBTypeController::get()->getDbType()) {
 
             DB_JSON => new FileBase('members'),
@@ -205,12 +187,6 @@ class AddAccountController
     {
 
         // $writer = new FileBase('members');
-
-
-        // $writer = match(DB) {
-        //     'file' => new FileBase('members'),
-        //     'maria' => new MariaBase('accounts'),
-        // };
 
         $writer = match (DBTypeController::get()->getDbType()) {
 
